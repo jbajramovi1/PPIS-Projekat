@@ -1,7 +1,8 @@
 package com.example.netflixmgmt.models;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
+@Entity
 public class UserRole {
 
     @ManyToOne(targetEntity = User.class)
