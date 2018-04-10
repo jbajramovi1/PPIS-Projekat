@@ -1,6 +1,7 @@
 package com.example.netflixmgmt.services;
 
 
+import com.example.netflixmgmt.models.Account;
 import com.example.netflixmgmt.repositories.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,19 +24,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
-        com.example.netflixmgmt.models.Account userAccount = accountRepository.findAccountByEmail(s);
+
+        Account userAccount = accountRepository.findAccountByEmail(s);
         if(userAccount == null) {
-            throw new UsernameNotFoundException("Username not found");
+            throw new UsernameNotFoundException("User not found");
         }
         return new User(userAccount.getEmail(), userAccount.getPassword(), getGrantedAuthorities(userAccount));
     }
 
-    private Collection<GrantedAuthority> getGrantedAuthorities(com.example.netflixmgmt.models.Account account) {
+    private Collection<GrantedAuthority> getGrantedAuthorities(Account account) {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        //if(user.getUserRoleList() != null) {
-         //   for(UserRole userRole : user.getUserRoleList())
-          //      authorities.add(new SimpleGrantedAuthority(userRole.getRole().getTitle()));
-        //}
+        authorities.add(new SimpleGrantedAuthority(account.getRole().getTitle()));
         return authorities;
     }
 }

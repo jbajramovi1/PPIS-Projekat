@@ -30,7 +30,7 @@ public class TokenAuthenticationService {
     private static IAccountRepository accountRepository;
 
     static final long EXPIRATIONTIME = 864_000_000; // 10 days
-    static final String SECRET = "ThisIsASecret";
+    static final String SECRET = "netflix-management";
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
 
@@ -45,11 +45,7 @@ public class TokenAuthenticationService {
                 .signWith(HS512, SECRET)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
-        /*res.addHeader("Roles", userRepository.findUserByEmail(email)
-                .getUserRoleList()
-                .stream()
-                .map(ur -> ur.getRole().getTitle())
-                .collect(Collectors.toList()).toString());*/
+        res.addHeader("Roles", accountRepository.findAccountByEmail(email).getRole().getTitle());
     }
 
     public static Authentication getAuthentication(HttpServletRequest request) {
@@ -70,8 +66,7 @@ public class TokenAuthenticationService {
             Account userAccount = accountRepository.findAccountByEmail(user);
             Collection<GrantedAuthority> authorities = new ArrayList<>();
             if(userAccount != null) {
-                //for(UserRole userRole : userAccount.getUserRoleList())
-                 //   authorities.add(new SimpleGrantedAuthority(userRole.getRole().getTitle()));
+                authorities.add(new SimpleGrantedAuthority(userAccount.getRole().getTitle()));
             }
 
             return user != null ?
