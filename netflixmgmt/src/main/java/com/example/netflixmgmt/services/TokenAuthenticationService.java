@@ -1,8 +1,8 @@
 package com.example.netflixmgmt.services;
 
-import com.example.netflixmgmt.models.User;
-import com.example.netflixmgmt.models.UserRole;
-import com.example.netflixmgmt.repositories.IUserRepository;
+
+import com.example.netflixmgmt.models.Account;
+import com.example.netflixmgmt.repositories.IAccountRepository;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,7 +27,7 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 public class TokenAuthenticationService {
 
 
-    private static IUserRepository userRepository;
+    private static IAccountRepository accountRepository;
 
     static final long EXPIRATIONTIME = 864_000_000; // 10 days
     static final String SECRET = "ThisIsASecret";
@@ -37,7 +37,7 @@ public class TokenAuthenticationService {
     public static void addAuthentication(HttpServletRequest req, HttpServletResponse res, String email) {
         ServletContext servletContext = req.getServletContext();
         WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-        userRepository = webApplicationContext.getBean(IUserRepository.class);
+        accountRepository = webApplicationContext.getBean(IAccountRepository.class);
 
         String JWT = Jwts.builder()
                 .setSubject(email)
@@ -45,18 +45,18 @@ public class TokenAuthenticationService {
                 .signWith(HS512, SECRET)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
-        res.addHeader("Roles", userRepository.findUserByEmail(email)
+        /*res.addHeader("Roles", userRepository.findUserByEmail(email)
                 .getUserRoleList()
                 .stream()
                 .map(ur -> ur.getRole().getTitle())
-                .collect(Collectors.toList()).toString());
+                .collect(Collectors.toList()).toString());*/
     }
 
     public static Authentication getAuthentication(HttpServletRequest request) {
 
         ServletContext servletContext = request.getServletContext();
         WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-        userRepository = webApplicationContext.getBean(IUserRepository.class);
+        accountRepository = webApplicationContext.getBean(IAccountRepository.class);
 
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
@@ -67,11 +67,11 @@ public class TokenAuthenticationService {
                     .getBody()
                     .getSubject();
 
-            User userAccount = userRepository.findUserByEmail(user);
+            Account userAccount = accountRepository.findAccountByEmail(user);
             Collection<GrantedAuthority> authorities = new ArrayList<>();
             if(userAccount != null) {
-                for(UserRole userRole : userAccount.getUserRoleList())
-                    authorities.add(new SimpleGrantedAuthority(userRole.getRole().getTitle()));
+                //for(UserRole userRole : userAccount.getUserRoleList())
+                 //   authorities.add(new SimpleGrantedAuthority(userRole.getRole().getTitle()));
             }
 
             return user != null ?

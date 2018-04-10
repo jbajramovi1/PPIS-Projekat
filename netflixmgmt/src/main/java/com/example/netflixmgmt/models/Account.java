@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-public class User {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,21 +17,21 @@ public class User {
     private String password;
 
 
-    @OneToMany(mappedBy = "user", targetEntity = UserRole.class, cascade = CascadeType.ALL)
-    private List<UserRole> userRoleList = new ArrayList<>();
+    @ManyToOne(targetEntity = Role.class)
+    private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", targetEntity = ChangeRequest.class, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", targetEntity = ChangeRequest.class, cascade = CascadeType.ALL)
     private List<ChangeRequest> changeRequestValues = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", targetEntity = Issue.class, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", targetEntity = Issue.class, cascade = CascadeType.ALL)
     private List<Issue> issueValues = new ArrayList<>();
 
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Long getId() {
@@ -58,14 +58,14 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String email, String password, List<UserRole> userRoleList) {
+    public Account(Long id, String email, String password, Role role) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.userRoleList = userRoleList;
+        this.role=role;
     }
 
-    public User() {
+    public Account() {
 
     }
 

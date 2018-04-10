@@ -19,8 +19,8 @@ public class Issue {
     private String name;
     private Date date;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    private User user;
+    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY)
+    private Account account;
 
     @ManyToOne(targetEntity = Component.class, fetch = FetchType.LAZY)
     private Component component;
@@ -37,10 +37,10 @@ public class Issue {
     public Issue() {
     }
 
-    public Issue(String name, Date date, User user, Component component, IssueStatus issueStatus, IssueType issueType) {
+    public Issue(String name, Date date, Account account, Component component, IssueStatus issueStatus, IssueType issueType) {
         this.name = name;
         this.date = date;
-        this.user = user;
+        this.account=account;
         this.component = component;
         this.issueStatus = issueStatus;
         this.issueType = issueType;
@@ -78,12 +78,12 @@ public class Issue {
         this.component = component;
     }
 
-    public User getUser() {
-        return user;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccount(Account account) {
+        this.account=account;
     }
 
     public IssueStatus getIssueStatus() {

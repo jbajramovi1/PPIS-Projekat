@@ -19,8 +19,8 @@ public class ChangeRequest {
     private String description;
     private String revisionComment;
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    private User user;
+    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY)
+    private Account account;
 
     @ManyToOne(targetEntity = ChangeRequestStatus.class, fetch = FetchType.LAZY)
     private ChangeRequestStatus changeRequestStatus;
@@ -34,11 +34,11 @@ public class ChangeRequest {
     public ChangeRequest() {
     }
 
-    public ChangeRequest(String name, String description, String revisionComment, User user, ChangeRequestStatus changeRequestStatus, ChangeRequestType changeRequestType) {
+    public ChangeRequest(String name, String description, String revisionComment, Account account, ChangeRequestStatus changeRequestStatus, ChangeRequestType changeRequestType) {
         this.name = name;
         this.description = description;
         this.revisionComment = revisionComment;
-        this.user = user;
+        this.account=account;
         this.changeRequestStatus = changeRequestStatus;
         this.changeRequestType = changeRequestType;
     }
@@ -75,12 +75,12 @@ public class ChangeRequest {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccount(Account account) {
+        this.account=account;
     }
 
     public List<ChangeRequestStatusLog> getChangeRequestStatusLogValues() {

@@ -11,10 +11,10 @@ public class Role {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    public Role(Long id, String title, List<UserRole> userRoleList) {
+    public Role(Long id, String title, List<Account> accountList) {
         this.id = id;
         this.title = title;
-        this.userRoleList = userRoleList;
+        this.accountList=accountList;
     }
 
     public Role() {
@@ -23,15 +23,15 @@ public class Role {
 
     private String title;
 
-    @OneToMany(mappedBy = "role", targetEntity = UserRole.class, cascade = CascadeType.ALL)
-    private List<UserRole> userRoleList = new ArrayList<>();
+    @OneToMany(mappedBy = "role", targetEntity = Account.class, cascade = CascadeType.ALL)
+    private List<Account> accountList = new ArrayList<>();
 
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
+    public List<Account> getUserList() {
+        return accountList;
     }
 
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
+    public void setUserList(List<Account> accountListList) {
+        this.accountList=accountList;
     }
 
     public Long getId() {
