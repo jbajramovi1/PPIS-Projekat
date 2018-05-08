@@ -36,11 +36,26 @@ class RegisterCR extends Component{
       type:0,
       description:''
     };
+    this.reset=this.reset.bind(this);
+    this.onChange=this.onChange.bind(this);
+  }
+
+  reset(event){
+
+    this.setState({
+      name:'',
+      type:0,
+      description:''
+    });
   }
 
   toggle() {
     this.setState({ collapse: !this.state.collapse });
   }
+
+  onChange(e) {
+        this.setState({[e.target.name]:e.target.value});
+    }
 
 
   render(){
@@ -95,7 +110,10 @@ class RegisterCR extends Component{
               </CardBody>
               <CardFooter>
                 <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
-                <Button color="danger" size="sm"><i className="fa fa-ban"></i> Cancel</Button>
+                <Button type="reset" color="danger"  size="sm"><i className="fa fa-ban"></i> Reset</Button>
+                <Row className="float-right">
+                  <Button type="reset" color="secondary"  size="sm">Cancel</Button>
+                </Row>
               </CardFooter>
             </Card>
             </Form>
