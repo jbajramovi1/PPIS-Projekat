@@ -51,7 +51,7 @@ public class ChangeRequestController {
     		return ResponseEntity.ok(request);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/getbytype",method = RequestMethod.GET)
 	public ResponseEntity<?> getRequestByType(@RequestParam("type") ChangeRequestType type) {
 		List<ChangeRequest> requests = changeService.getByChangeRequestType(type);
 		
@@ -61,7 +61,7 @@ public class ChangeRequestController {
     		return ResponseEntity.ok(requests);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/getbystatus",method = RequestMethod.GET)
 	public ResponseEntity<?> getRequestByStatus(@RequestParam("status") ChangeRequestStatus status) {
 		List<ChangeRequest> requests = changeService.getByChangeRequestStatus(status);
 		
@@ -107,7 +107,7 @@ public class ChangeRequestController {
 		}
 	}
 	
-	@RequestMapping(value = "/save/status", method = RequestMethod.POST)
+	@RequestMapping(value = "/save/type", method = RequestMethod.POST)
 	public ResponseEntity<?> saveChangeRequestType(@RequestBody ChangeRequestType type) {
 		if (type == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
