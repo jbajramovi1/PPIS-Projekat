@@ -56,7 +56,7 @@ public class IssueController {
     		return ResponseEntity.ok(issue);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/getbytype", method = RequestMethod.GET)
 	public ResponseEntity<?> getIssueByType(@RequestParam("type") IssueType type) {
 		List<Issue> issues = issueService.getByIssueType(type);
 		
@@ -66,7 +66,7 @@ public class IssueController {
     		return ResponseEntity.ok(issues);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/getbystatus",method = RequestMethod.GET)
 	public ResponseEntity<?> getIssueByStatus(@RequestParam("status") IssueStatus status) {
 		List<Issue> issues  = issueService.getByIssueStatus(status);
 		
@@ -112,7 +112,7 @@ public class IssueController {
 		}
 	}
 	
-	@RequestMapping(value = "/save/status", method = RequestMethod.POST)
+	@RequestMapping(value = "/save/type", method = RequestMethod.POST)
 	public ResponseEntity<?> saveIssueType(@RequestBody IssueType type) {
 		if (type == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
