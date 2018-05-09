@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface IAccountRepository extends PagingAndSortingRepository<Account, Long> {
     Account findAccountById(Long id);
-    Account findAccountByEmail(String email);
+    Account findAccountByUsername(String username);
     List<Account> findAll();
 
 }

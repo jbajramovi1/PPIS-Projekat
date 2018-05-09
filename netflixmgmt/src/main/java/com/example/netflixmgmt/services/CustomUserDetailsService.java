@@ -25,11 +25,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
 
-        Account userAccount = accountRepository.findAccountByEmail(s);
+        Account userAccount = accountRepository.findAccountByUsername(s);
         if(userAccount == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new User(userAccount.getEmail(), userAccount.getPassword(), getGrantedAuthorities(userAccount));
+        return new User(userAccount.getUsername(), userAccount.getPassword(), getGrantedAuthorities(userAccount));
     }
 
     private Collection<GrantedAuthority> getGrantedAuthorities(Account account) {
