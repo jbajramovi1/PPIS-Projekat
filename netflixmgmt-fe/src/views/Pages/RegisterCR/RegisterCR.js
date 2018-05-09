@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {
 Container,
 Button,
@@ -24,6 +25,8 @@ InputGroupText,
 Label,
 Row, } from 'reactstrap';
 
+const protocol = window.location.protocol;
+const hostname = window.location.hostname;
 
 class RegisterCR extends Component{
   constructor(props) {
@@ -36,18 +39,31 @@ class RegisterCR extends Component{
       type:0,
       description:''
     };
-    this.reset=this.reset.bind(this);
+    this.registerCR = this.registerCR.bind(this);
     this.onChange=this.onChange.bind(this);
   }
 
-  reset(event){
+  registerCR(event){
+    axios.post(protocol+'//'+hostname+':8080/changeRequest/save', {
+                  name: this.state.name,
+                  description: this.state.description
+              })
+              .then(this.handleSuccess.bind(this))
+              .catch(this.handleError.bind(this));
 
-    this.setState({
-      name:'',
-      type:0,
-      description:''
-    });
   }
+
+  handleSuccess(response) {
+        if(response.data)
+        {
+            alert('Successfully registered change request!');
+            //redirect to window
+        }
+    }
+
+    handleError(error) {
+        alert(error.response.data);
+    }
 
   toggle() {
     this.setState({ collapse: !this.state.collapse });
@@ -62,7 +78,7 @@ class RegisterCR extends Component{
     return(
       <div className="app flex-row align-items-center">
         <Container>
-          <Row className="justify-content-center">
+          <Row className="justify-content-center" >
             <Col md="8">
             <Form  action="" method="post" encType="multipart/form-data" className="form-horizontal">
 
