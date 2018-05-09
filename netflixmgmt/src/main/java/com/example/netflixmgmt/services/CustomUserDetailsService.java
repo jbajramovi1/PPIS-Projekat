@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,7 +31,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(userAccount == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new User(userAccount.getUsername(), userAccount.getPassword(), getGrantedAuthorities(userAccount));
+//        return new User(userAccount.getUsername(), userAccount.getPassword(), getGrantedAuthorities(userAccount));
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return User.withUsername(userAccount.getUsername())
+                .password(encoder.encode(userAccount.getPassword()))
+                .authorities(getGrantedAuthorities(userAccount))
+                .build();
     }
 
     private Collection<GrantedAuthority> getGrantedAuthorities(Account account) {
