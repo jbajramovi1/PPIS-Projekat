@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardColumns, CardHeader, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Pie } from 'react-chartjs-2';
+import axios from 'axios';
+
+
+const API_ROUTE = 'http://localhost:8080/changeRequest/get-stats';
+
 
 const pie = {
     labels: [
@@ -25,6 +30,66 @@ const pie = {
   };
 
 class ChangeStatistics extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      pie: {
+          labels: [
+
+          ],
+          datasets: [
+              {
+                  data: [],
+                  backgroundColor: [
+                      '#FF6384',
+                      '#36A2EB',
+                      '#FFCE56',
+                  ],
+                  hoverBackgroundColor: [
+                      '#FF6384',
+                      '#36A2EB',
+                      '#FFCE56',
+                  ],
+              }],
+      }
+    };
+      
+
+  }
+
+  fetchStats() {
+    axios.get(API_ROUTE, {
+      headers: {'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmlzYSIsImV4cCI6MTUyNzI2OTkzMn0.0Uv3ZtZfJEgaHDP0O7X6IMgDWVWpU5SnK2UwHxBoWasG2BF24eC385eV9MiAcftuyyGV-Eehg_od2_RyVD1URg'}}
+      ).then((response) => {
+        let pieData = response.data;
+        let newPie = this.state.pie;
+        let keys = Object.keys(pieData);
+        let i = 1;
+        let len = keys.length;
+        let prope;
+        let value;
+        while (i<len){
+            prope = keys[i];
+            value = pieData[prope];
+            newPie.labels.push(prope);
+            newPie.datasets[0].data.push(value);
+            i = i+ 1;
+        }
+
+        this.setState({
+            pie:newPie
+        })
+        console.log(this.state.pie.labels)
+    }).catch(error => {
+
+    });
+  }
+
+  componentDidMount() {
+    this.fetchStats();
+  }
+
   render() {
     return (
         
@@ -44,7 +109,7 @@ class ChangeStatistics extends Component {
             </CardHeader>
             <CardBody>
               <div className="chart-wrapper">
-                <Pie data={pie} />
+                <Pie data={this.state.pie} />
               </div>
             </CardBody>
           </Card>

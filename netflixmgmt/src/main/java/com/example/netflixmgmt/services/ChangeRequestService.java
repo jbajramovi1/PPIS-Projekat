@@ -1,9 +1,12 @@
 package com.example.netflixmgmt.services;
 
+import com.example.netflixmgmt.models.Account;
 import com.example.netflixmgmt.models.ChangeRequest;
 import com.example.netflixmgmt.models.ChangeRequestStatus;
 import com.example.netflixmgmt.models.ChangeRequestType;
+import com.example.netflixmgmt.repositories.IAccountRepository;
 import com.example.netflixmgmt.repositories.IChangeRequestRepository;
+import com.example.netflixmgmt.repositories.IChangeRequestStatusRepository;
 import com.example.netflixmgmt.repositories.IChangeRequestTypeRepository;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,11 @@ public class ChangeRequestService {
     @Autowired
     private IChangeRequestTypeRepository changeRequestTypeRepository;
 
+    @Autowired
+    private IAccountRepository accountRepository;
+
+    @Autowired
+    private IChangeRequestStatusRepository changeRequestStatusRepository;
 
     public ChangeRequest createChangeRequest(ChangeRequest data){
         ChangeRequest changeRequest=new ChangeRequest();
@@ -70,13 +78,26 @@ public class ChangeRequestService {
 
     public Map<String, Integer> getChangeRequestStatistics(){
         Map<String, Integer> results = new LinkedHashMap<>();
-        
-        results.put("All requests", changeRequestRepository.findAll().size());
 
-        for (ChangeRequestType changeRequestType:
-                changeRequestTypeRepository.findAll()) {
-            results.put(changeRequestType.getName(),
-                    changeRequestRepository.findChangeRequestByChangeRequestType(changeRequestType).size());
+//        Account acc = accountRepository.findAccountById(new Long(1));
+//
+//        ChangeRequestType cRT = changeRequestTypeRepository.save(new ChangeRequestType("ss", "ss"));
+//
+//        ChangeRequestStatus first = changeRequestStatusRepository.save(new ChangeRequestStatus("Approved"));
+//        ChangeRequestStatus second = changeRequestStatusRepository.save(new ChangeRequestStatus("Denied"));
+//        ChangeRequestStatus third = changeRequestStatusRepository.save(new ChangeRequestStatus("OnHold"));
+//
+//        changeRequestRepository.save(new ChangeRequest("Nesto", "Nesto", "", acc, first, cRT ));
+//        changeRequestRepository.save(new ChangeRequest("Nesto", "Nesto", "", acc, first, cRT ));
+//        changeRequestRepository.save(new ChangeRequest("Nesto", "Nesto", "", acc, second, cRT ));
+//        changeRequestRepository.save(new ChangeRequest("Nesto", "Nesto", "", acc, third, cRT ));
+
+        results.put("AllRequests", changeRequestRepository.findAll().size());
+
+        for (ChangeRequestStatus changeRequestStatus:
+                changeRequestStatusRepository.findAll()) {
+            results.put(changeRequestStatus.getName(),
+                    changeRequestRepository.findChangeRequestByChangeRequestStatus(changeRequestStatus).size());
             
         }
 
