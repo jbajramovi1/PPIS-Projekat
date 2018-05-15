@@ -6,6 +6,7 @@ import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler }
 import logo from '../../assets/img/brand/logo.svg'
 import sygnet from '../../assets/img/brand/sygnet.svg'
 import {Redirect} from "react-router";
+import axios from "axios";
 
 const propTypes = {
   children: PropTypes.node,
@@ -26,7 +27,8 @@ class DefaultHeader extends Component {
         localStorage.removeItem('token');
         this.setState({
             token: ""
-        })
+        });
+        axios.defaults.headers.remove('Authorization');
     }
 
     render() {

@@ -16,10 +16,22 @@ import './scss/style.css'
 import { DefaultLayout } from './containers';
 // Pages
 import { Login, Page404, Page500, Register} from './views/Pages';
+import axios from "axios";
+
 
 // import { renderRoutes } from 'react-router-config';
 
 class App extends Component {
+
+  componentDidMount() {
+    let token = localStorage.getItem("token");
+    if (token) {
+      axios.defaults.headers['Authorization'] = token;
+    }
+    console.log('axios defaults', axios.defaults)
+  }
+
+
   render() {
     return (
       <HashRouter>
