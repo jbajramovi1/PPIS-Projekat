@@ -1,7 +1,11 @@
 package com.example.netflixmgmt.controller;
 
-import java.util.List;
-
+import com.example.netflixmgmt.models.ChangeRequest;
+import com.example.netflixmgmt.models.ChangeRequestStatus;
+import com.example.netflixmgmt.models.ChangeRequestType;
+import com.example.netflixmgmt.services.ChangeRequestService;
+import com.example.netflixmgmt.services.ChangeRequestStatusService;
+import com.example.netflixmgmt.services.ChangeRequestTypeService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,12 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.netflixmgmt.models.ChangeRequest;
-import com.example.netflixmgmt.models.ChangeRequestStatus;
-import com.example.netflixmgmt.models.ChangeRequestType;
-import com.example.netflixmgmt.services.ChangeRequestService;
-import com.example.netflixmgmt.services.ChangeRequestStatusService;
-import com.example.netflixmgmt.services.ChangeRequestTypeService;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/changeRequest")

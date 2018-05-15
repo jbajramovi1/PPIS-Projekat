@@ -12,7 +12,7 @@ public class Account {
     private Long id;
 
     @Column(unique = true)
-    private String email;
+    private String username;
 
     private String password;
 
@@ -42,12 +42,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -58,9 +58,9 @@ public class Account {
         this.password = password;
     }
 
-    public Account(Long id, String email, String password, Role role) {
+    public Account(Long id, String username, String password, Role role) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.role=role;
     }
