@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardFooter, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button, Card, CardBody, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 
-const API_ROUTE = 'http://localhost:8080/auth/register';
+const API_ROUTE = 'http://localhost:8080/register/save';
 
 class Register extends Component {
 
@@ -56,20 +56,20 @@ class Register extends Component {
                         <i className="icon-user"></i>
                       </InputGroupText>
                     </InputGroupAddon>
-                      <Input type="text" 
+                      <Input type="text"
                         placeholder='Username'
                         name='username'
-                        value={this.state.username} 
+                        value={this.state.username}
                         onChange={this.updateState}/>
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>@</InputGroupText>
                     </InputGroupAddon>
-                      <Input type="text" 
+                      <Input type="text"
                         placeholder='Email'
                         name='email'
-                        value={this.state.email} 
+                        value={this.state.email}
                         onChange={this.updateState}/>
                   </InputGroup>
                   <InputGroup className="mb-3">
@@ -78,10 +78,10 @@ class Register extends Component {
                         <i className="icon-lock"></i>
                       </InputGroupText>
                     </InputGroupAddon>
-                      <Input type="password" 
+                      <Input type="password"
                         placeholder='Password'
                         name='pass'
-                        value={this.state.pass} 
+                        value={this.state.pass}
                         onChange={this.updateState}/>
                   </InputGroup>
                   <InputGroup className="mb-4">
@@ -90,28 +90,18 @@ class Register extends Component {
                         <i className="icon-lock"></i>
                       </InputGroupText>
                     </InputGroupAddon>
-                      <Input type="password" 
+                      <Input type="password"
                         placeholder='Repeat password'
                         name='repeatPass'
-                        value={this.state.repeatPass} 
+                        value={this.state.repeatPass}
                         onChange={this.updateState}/>
                   </InputGroup>
-                  <Button color="success" 
-                    className="px-4" 
+                  <Button color="success"
+                    className="px-4"
                     onClick={(event) => this.register(event)}>
-                      Login
+                      Register
                   </Button>
                 </CardBody>
-                <CardFooter className="p-4">
-                  <Row>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-facebook" block><span>facebook</span></Button>
-                    </Col>
-                    <Col xs="12" sm="6">
-                      <Button className="btn-twitter" block><span>twitter</span></Button>
-                    </Col>
-                  </Row>
-                </CardFooter>
               </Card>
             </Col>
           </Row>

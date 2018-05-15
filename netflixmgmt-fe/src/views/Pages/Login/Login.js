@@ -34,8 +34,9 @@ class Login extends Component {
 
     axios.post(API_ROUTE, data)
       .then(response => {
-        localStorage.setItem('token', response);
-        this.state.authenticated = true;
+        localStorage.setItem('token', response.headers['authorization']);
+        axios.defaults.headers['Authorization'] = response.headers['authorization'];
+        this.setState({authenticated: true})
       })
       .catch(function (error) {
         console.log(error);
@@ -43,7 +44,9 @@ class Login extends Component {
   }
 
   register (event) {
-    this.state.register = true;
+    this.setState({
+        register: true
+    })
   }
 
   render() {
@@ -69,10 +72,10 @@ class Login extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" 
+                      <Input type="text"
                       placeholder='Username'
                       name='email'
-                      value={this.state.email} 
+                      value={this.state.email}
                       onChange={this.updateState}/>
                     </InputGroup>
                     <InputGroup className="mb-4">
@@ -81,16 +84,16 @@ class Login extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" 
+                      <Input type="password"
                         placeholder='Password'
                         name='pass'
-                        value={this.state.pass} 
+                        value={this.state.pass}
                         onChange={this.updateState}/>
                     </InputGroup>
                     <Row>
                       <Col xs="6">
-                        <Button color="primary" 
-                          className="px-4" 
+                        <Button color="primary"
+                          className="px-4"
                           onClick={(event) => this.login(event)}>
                             Login
                         </Button>
@@ -105,8 +108,8 @@ class Login extends Component {
                   <CardBody className="text-center">
                     <div>
                       <h2>Sign up</h2>
-                      <Button color="primary" 
-                      className="mt-3" 
+                      <Button color="primary"
+                      className="mt-3"
                       onClick={event => this.register(event)}
                       active>
                         Register Now!
