@@ -4,11 +4,16 @@ import com.example.netflixmgmt.models.ChangeRequest;
 import com.example.netflixmgmt.models.ChangeRequestStatus;
 import com.example.netflixmgmt.models.ChangeRequestType;
 import com.example.netflixmgmt.repositories.IChangeRequestRepository;
+import com.example.netflixmgmt.repositories.IChangeRequestTypeRepository;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.security.util.Length;
 
 import javax.transaction.Transactional;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -16,6 +21,10 @@ public class ChangeRequestService {
 
     @Autowired
     private IChangeRequestRepository changeRequestRepository;
+
+    @Autowired
+    private IChangeRequestTypeRepository changeRequestTypeRepository;
+
 
     public ChangeRequest createChangeRequest(ChangeRequest data){
         ChangeRequest changeRequest=new ChangeRequest();
@@ -57,5 +66,21 @@ public class ChangeRequestService {
         if (data.getAccount()!=null) changeRequest.setAccount(data.getAccount());
         if (data.getRevisionComment()!=null) changeRequest.setRevisionComment(data.getRevisionComment());
         return changeRequestRepository.save(changeRequest);
+    }
+
+    public Map<String, Integer> getChangeRequestStatistics(){
+        Map<String, Integer> results = new LinkedHashMap<>();
+        
+        results.put("All requests", changeRequestRepository.findAll().size());
+
+        for (ChangeRequestType changeRequestType:
+                changeRequestTypeRepository.findAll()) {
+            results.put(changeRequestType.getName(),
+                    changeRequestRepository.findChangeRequestByChangeRequestType(changeRequestType).size());
+            
+        }
+
+        return results;
+
     }
 }

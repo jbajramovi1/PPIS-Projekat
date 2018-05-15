@@ -1,6 +1,7 @@
 package com.example.netflixmgmt.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,4 +125,15 @@ public class ChangeRequestController {
 	    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
 		}
 	}
+
+	@RequestMapping(value = "/get-stats", method = RequestMethod.GET)
+	public ResponseEntity<?> getStatistics() {
+		Map<String, Integer> request = changeService.getChangeRequestStatistics();
+
+		if (request == null)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No requests");
+		else
+			return ResponseEntity.ok(request);
+	}
+
 }
