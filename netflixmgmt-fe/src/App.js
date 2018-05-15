@@ -15,7 +15,7 @@ import './scss/style.css'
 // Containers
 import { DefaultLayout } from './containers';
 // Pages
-import { Login, Page404, Page500, Register, RegisterCR } from './views/Pages';
+import { Login, Page404, Page500, Register} from './views/Pages';
 
 // import { renderRoutes } from 'react-router-config';
 

@@ -1,0 +1,6 @@
+{
+  "name":"ViewCR",
+  "version":"0.0.0",
+  "private":true,
+  "main":"./ViewCR.js"
+}
