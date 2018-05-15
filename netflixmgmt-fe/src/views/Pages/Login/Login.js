@@ -1,8 +1,58 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import axios from 'axios';
+import { Redirect } from 'react-router';
+
+const API_ROUTE = 'http://localhost:8080/login';
 
 class Login extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      pass: '',
+      authenticated: false,
+      register: false
+    }
+
+    this.updateState = this.updateState.bind(this);
+  };
+
+  updateState (event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  login (event) {
+    const data = {
+      username: this.state.email,
+      password: this.state.pass
+    };
+
+    axios.post(API_ROUTE, data)
+      .then(response => {
+        localStorage.setItem('token', response);
+        this.state.authenticated = true;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  register (event) {
+    this.state.register = true;
+  }
+
   render() {
+    if (this.state.authenticated) {
+      return <Redirect to='/' />
+    } else if (this.state.register) {
+      return <Redirect to='/register' />
+    }
+
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -19,7 +69,11 @@ class Login extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Username" />
+                      <Input type="text" 
+                      placeholder='Username'
+                      name='email'
+                      value={this.state.email} 
+                      onChange={this.updateState}/>
                     </InputGroup>
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
@@ -27,11 +81,19 @@ class Login extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Password" />
+                      <Input type="password" 
+                        placeholder='Password'
+                        name='pass'
+                        value={this.state.pass} 
+                        onChange={this.updateState}/>
                     </InputGroup>
                     <Row>
                       <Col xs="6">
-                        <Button color="primary" className="px-4">Login</Button>
+                        <Button color="primary" 
+                          className="px-4" 
+                          onClick={(event) => this.login(event)}>
+                            Login
+                        </Button>
                       </Col>
                       <Col xs="6" className="text-right">
                         <Button color="link" className="px-0">Forgot password?</Button>
@@ -43,9 +105,12 @@ class Login extends Component {
                   <CardBody className="text-center">
                     <div>
                       <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                      <Button color="primary" className="mt-3" active>Register Now!</Button>
+                      <Button color="primary" 
+                      className="mt-3" 
+                      onClick={event => this.register(event)}
+                      active>
+                        Register Now!
+                      </Button>
                     </div>
                   </CardBody>
                 </Card>
