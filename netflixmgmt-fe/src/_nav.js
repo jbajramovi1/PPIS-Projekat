@@ -6,7 +6,7 @@ export default {
       icon: 'icon-speedometer',
       badge: {
         variant: 'info',
-        text: 'NEW',
+        text: '',
       },
     },
     {
@@ -18,13 +18,22 @@ export default {
       },
     },
     {
-      name: 'Change requests',
-      url: '/widgets',
+      name: 'Register a new CR',
+      url: '/registercr',
       icon: 'icon-calculator',
       badge: {
         variant: 'info',
         text: '',
       },
+    },
+    {
+        name: 'View all requests',
+        url: '/undefined',
+        icon: 'icon-calculator',
+        badge: {
+            variant: 'info',
+            text: '',
+        },
     }
   ]
 };

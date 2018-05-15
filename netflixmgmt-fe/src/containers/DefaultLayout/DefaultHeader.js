@@ -28,7 +28,7 @@ class DefaultHeader extends Component {
         this.setState({
             token: ""
         });
-        axios.defaults.headers.remove('Authorization');
+        delete axios.defaults.headers['Authorization'];
     }
 
     render() {
@@ -43,32 +43,19 @@ class DefaultHeader extends Component {
         return (
           <React.Fragment>
             <AppSidebarToggler className="d-lg-none" display="md" mobile />
-            <AppNavbarBrand
-              full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
-              minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
-            />
             <AppSidebarToggler className="d-md-down-none" display="lg" />
 
             <Nav className="d-md-down-none" navbar>
               <NavItem className="px-3">
-                <NavLink href="/">Dashboard</NavLink>
-              </NavItem>
-              <NavItem className="px-3">
-                <NavLink href="#">Change requests</NavLink>
+                <NavLink href="/#/dashboard">Netflix Management</NavLink>
               </NavItem>
             </Nav>
             <Nav className="ml-auto" navbar>
-              <NavItem className="d-md-down-none">
-                <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
-              </NavItem>
               <AppHeaderDropdown direction="down">
                 <DropdownToggle nav>
                   <img src={'assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                 </DropdownToggle>
                 <DropdownMenu right style={{ right: 'auto' }}>
-                  <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
-                  <DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>
-                  <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
                   <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
                   <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
                   <DropdownItem divider />
