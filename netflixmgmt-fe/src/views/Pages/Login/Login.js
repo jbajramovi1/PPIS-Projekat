@@ -28,11 +28,11 @@ class Login extends Component {
 
   login (event) {
     const data = {
-      email: this.state.email,
+      username: this.state.email,
       password: this.state.pass
     };
 
-    axios.post(API_ROUTE, JSON.stringify(data))
+    axios.post(API_ROUTE, data)
       .then(response => {
         localStorage.setItem('token', response);
         this.state.authenticated = true;
