@@ -25,8 +25,7 @@ InputGroupText,
 Label,
 Row, } from 'reactstrap';
 
-const protocol = window.location.protocol;
-const hostname = window.location.hostname;
+const API_ROUTE = 'http://localhost:8080/changeRequest/save';
 
 class RegisterCR extends Component{
   constructor(props) {
@@ -39,12 +38,15 @@ class RegisterCR extends Component{
       type:0,
       description:''
     };
-    this.registerCR = this.registerCR.bind(this);
+
     this.onChange=this.onChange.bind(this);
+    this.handleSuccess=this.handleSuccess.bind(this);
+    this.handleError=this.handleError.bind(this);
   }
 
   registerCR(event){
-    axios.post(protocol+'//'+hostname+':8080/changeRequest/save', {
+    alert(this.state.name);
+    axios.post(API_ROUTE, {
                   name: this.state.name,
                   description: this.state.description
               })
@@ -80,7 +82,7 @@ class RegisterCR extends Component{
         <Container>
           <Row className="justify-content-center" >
             <Col md="8">
-            <Form  action="" method="post" encType="multipart/form-data" className="form-horizontal">
+            <Form  encType="multipart/form-data" className="form-horizontal">
 
             <Card>
               <CardHeader>
@@ -93,7 +95,7 @@ class RegisterCR extends Component{
                       <Label htmlFor="text-input">Change Request name</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="text" id="text-input" name="name" placeholder="Name" />
+                      <Input type="text" id="text-input" name="name" placeholder="Name" value={this.state.name} onChange={this.onChange} />
                       <FormText color="muted">Please enter the name of your change request</FormText>
                     </Col>
                   </FormGroup>
@@ -117,7 +119,7 @@ class RegisterCR extends Component{
                       <Label htmlFor="textarea-input">Description</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="textarea" name="description" id="textarea-input" rows="9"
+                      <Input type="textarea" name="description" id="textarea-input" value={this.state.description} onChange={this.onChange} rows="9"
                              placeholder="Content..." />
                     </Col>
                   </FormGroup>
@@ -125,7 +127,7 @@ class RegisterCR extends Component{
 
               </CardBody>
               <CardFooter>
-                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                <Button type="submit" onClick={event => this.registerCR(event)} size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
                 <Button type="reset" color="danger"  size="sm"><i className="fa fa-ban"></i> Reset</Button>
                 <Row className="float-right">
                   <Button type="reset" color="secondary"  size="sm">Cancel</Button>
