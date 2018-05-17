@@ -1,5 +1,7 @@
 package com.example.netflixmgmt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +21,17 @@ public class ChangeRequest {
     private String description;
     private String revisionComment;
 
-    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Account.class, fetch = FetchType.EAGER)
     private Account account;
 
-    @ManyToOne(targetEntity = ChangeRequestStatus.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = ChangeRequestStatus.class, fetch = FetchType.EAGER)
     private ChangeRequestStatus changeRequestStatus;
 
-    @ManyToOne(targetEntity = ChangeRequestType.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = ChangeRequestType.class, fetch = FetchType.EAGER)
     private ChangeRequestType changeRequestType;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "changeRequest", targetEntity = ChangeRequestStatusLog.class, cascade = CascadeType.ALL)
-    private List<ChangeRequestStatusLog> changeRequestStatusLogValues = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "changeRequest", targetEntity = ChangeRequestStatusLog.class, cascade = CascadeType.ALL)
+//    private List<ChangeRequestStatusLog> changeRequestStatusLogValues = new ArrayList<>();
 
     public ChangeRequest() {
     }
@@ -82,14 +84,14 @@ public class ChangeRequest {
     public void setAccount(Account account) {
         this.account=account;
     }
-
-    public List<ChangeRequestStatusLog> getChangeRequestStatusLogValues() {
-        return changeRequestStatusLogValues;
-    }
-
-    public void setChangeRequestStatusLogValues(List<ChangeRequestStatusLog> changeRequestStatusLogValues) {
-        this.changeRequestStatusLogValues = changeRequestStatusLogValues;
-    }
+//
+//    public List<ChangeRequestStatusLog> getChangeRequestStatusLogValues() {
+//        return changeRequestStatusLogValues;
+//    }
+//
+//    public void setChangeRequestStatusLogValues(List<ChangeRequestStatusLog> changeRequestStatusLogValues) {
+//        this.changeRequestStatusLogValues = changeRequestStatusLogValues;
+//    }
 
     public ChangeRequestStatus getChangeRequestStatus() {
         return changeRequestStatus;

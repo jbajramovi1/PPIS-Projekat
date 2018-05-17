@@ -14,7 +14,7 @@ public class Role {
     public Role(Long id, String title, List<Account> accountList) {
         this.id = id;
         this.title = title;
-        this.accountList=accountList;
+//        this.accountList=accountList;
     }
 
     public Role() {
@@ -23,16 +23,16 @@ public class Role {
 
     private String title;
 
-    @OneToMany(mappedBy = "role", targetEntity = Account.class, cascade = CascadeType.ALL)
-    private List<Account> accountList = new ArrayList<>();
-
-    public List<Account> getUserList() {
-        return accountList;
-    }
-
-    public void setUserList(List<Account> accountListList) {
-        this.accountList=accountList;
-    }
+//    @OneToMany(mappedBy = "role", targetEntity = Account.class, cascade = CascadeType.ALL)
+//    private List<Account> accountList = new ArrayList<>();
+//
+//    public List<Account> getUserList() {
+//        return accountList;
+//    }
+//
+//    public void setUserList(List<Account> accountListList) {
+//        this.accountList=accountList;
+//    }
 
     public Long getId() {
         return id;

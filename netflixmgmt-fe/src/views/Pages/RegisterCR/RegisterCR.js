@@ -61,7 +61,8 @@ class RegisterCR extends Component{
     axios.post(API_ROUTE, {
                   name: this.state.name,
                   description: this.state.description,
-                  changeRequestType: {id:this.state.type}
+                  changeRequestType: {id:this.state.type},
+                  changeRequestStatus: {id:3}
               })
               .then(this.handleSuccess.bind(this))
               .catch(this.handleError.bind(this));

@@ -20,11 +20,11 @@ public class Account {
     @ManyToOne(targetEntity = Role.class)
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", targetEntity = ChangeRequest.class, cascade = CascadeType.ALL)
-    private List<ChangeRequest> changeRequestValues = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", targetEntity = Issue.class, cascade = CascadeType.ALL)
-    private List<Issue> issueValues = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", targetEntity = ChangeRequest.class, cascade = CascadeType.ALL)
+//    private List<ChangeRequest> changeRequestValues = new ArrayList<>();
+//
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account", targetEntity = Issue.class, cascade = CascadeType.ALL)
+//    private List<Issue> issueValues = new ArrayList<>();
 
     public Role getRole() {
         return role;
@@ -69,19 +69,19 @@ public class Account {
 
     }
 
-    public List<Issue> getIssueValues() {
-        return issueValues;
-    }
-
-    public void setIssueValues(List<Issue> issueValues) {
-        this.issueValues = issueValues;
-    }
-
-    public List<ChangeRequest> getChangeRequestValues() {
-        return changeRequestValues;
-    }
-
-    public void setChangeRequestValues(List<ChangeRequest> changeRequestValues) {
-        this.changeRequestValues = changeRequestValues;
-    }
+//    public List<Issue> getIssueValues() {
+//        return issueValues;
+//    }
+//
+//    public void setIssueValues(List<Issue> issueValues) {
+//        this.issueValues = issueValues;
+//    }
+//
+//    public List<ChangeRequest> getChangeRequestValues() {
+//        return changeRequestValues;
+//    }
+//
+//    public void setChangeRequestValues(List<ChangeRequest> changeRequestValues) {
+//        this.changeRequestValues = changeRequestValues;
+//    }
 }
