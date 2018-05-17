@@ -25,9 +25,9 @@ InputGroupText,
 Label,
 Row, } from 'reactstrap';
 
-const API_ROUTE = 'http://localhost:8080/changeRequest/save';
+const API_ROUTE = 'http://localhost:8080/issue/save';
 
-class RegisterCR extends Component{
+class RegisterAI extends Component{
   constructor(props) {
     super(props);
 
@@ -36,28 +36,15 @@ class RegisterCR extends Component{
       collapse: true,
       name:'',
       type:0,
-      description:'',
-      types: []
+      description:''
     };
 
-
-    this.registerCR = this.registerCR.bind(this);
     this.onChange=this.onChange.bind(this);
-
-
+    this.handleSuccess=this.handleSuccess.bind(this);
+    this.handleError=this.handleError.bind(this);
   }
 
-  componentWillMount(){
-    axios.get('http://localhost:8080/changeRequestType/all')
-    .then( response => {
-        console.log(response);
-        this.setState({types: response.data});
-    })
-
-    console.log(this.state.types);
-  }
-
-  registerCR(event){
+  registerAI(event){
     axios.post(API_ROUTE, {
                   name: this.state.name,
                   description: this.state.description
@@ -70,7 +57,7 @@ class RegisterCR extends Component{
   handleSuccess(response) {
         if(response.data)
         {
-            alert('Successfully registered change request!');
+            alert('Successfully registered issue!');
             //redirect to window
         }
     }
@@ -94,27 +81,41 @@ class RegisterCR extends Component{
         <Container>
           <Row className="justify-content-center" >
             <Col md="8">
-            <Form  action="" encType="multipart/form-data" className="form-horizontal">
+            <Form  encType="multipart/form-data" className="form-horizontal">
 
             <Card>
               <CardHeader>
-                <strong>Register Change Request</strong>
+                <strong>Register Availibility Issue</strong>
               </CardHeader>
               <CardBody>
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="text-input">Change Request name</Label>
+                      <Label htmlFor="text-input">Availibility issue name</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="text" id="text-input" name="name" placeholder="Name" />
-                      <FormText color="muted">Please enter the name of your change request</FormText>
+                      <Input type="text" id="text-input" name="name" placeholder="Name" value={this.state.name} onChange={this.onChange} />
+                      <FormText color="muted">Please enter the name of your issue</FormText>
                     </Col>
                   </FormGroup>
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="select">Change Request Type</Label>
+                      <Label htmlFor="select">Service</Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                      <Input type="select" name="type" id="select">
+                        <option value="0">Please select</option>
+                        <option value="1">Option #1</option>
+                        <option value="2">Option #2</option>
+                        <option value="3">Option #3</option>
+                      </Input>
+                    </Col>
+                  </FormGroup>
+
+                  <FormGroup row>
+                    <Col md="3">
+                      <Label htmlFor="select">Availibility issue Type</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input type="select" name="type" id="select">
@@ -131,7 +132,7 @@ class RegisterCR extends Component{
                       <Label htmlFor="textarea-input">Description</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="textarea" name="description" id="textarea-input" rows="9"
+                      <Input type="textarea" name="description" id="textarea-input" value={this.state.description} onChange={this.onChange} rows="9"
                              placeholder="Content..." />
                     </Col>
                   </FormGroup>
@@ -139,7 +140,7 @@ class RegisterCR extends Component{
 
               </CardBody>
               <CardFooter>
-                <Button size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                <Button onClick={event => this.registerAI(event)} size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
                 <Button type="reset" color="danger"  size="sm"><i className="fa fa-ban"></i> Reset</Button>
                 <Row className="float-right">
                   <Button type="reset" color="secondary"  size="sm">Cancel</Button>
@@ -155,4 +156,4 @@ class RegisterCR extends Component{
   }
 }
 
-export default RegisterCR;
+export default RegisterAI;
