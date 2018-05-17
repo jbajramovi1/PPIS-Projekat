@@ -27,6 +27,15 @@ export default {
       },
     },
     {
+      name: 'Report an issue',
+      url: '/registerai',
+      icon: 'icon-calculator',
+      badge: {
+        variant: 'info',
+        text: '',
+      },
+    },
+    {
         name: 'View all requests',
         url: '/undefined',
         icon: 'icon-calculator',

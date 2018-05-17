@@ -18,8 +18,8 @@ public class IssueType {
     private String name;
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueType", targetEntity = Issue.class, cascade = CascadeType.ALL)
-    private List<Issue> issueValues = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueType", targetEntity = Issue.class, cascade = CascadeType.ALL)
+//    private List<Issue> issueValues = new ArrayList<>();
 
     public IssueType() {
     }
@@ -53,11 +53,11 @@ public class IssueType {
         this.description = description;
     }
 
-    public List<Issue> getIssueValues() {
-        return issueValues;
-    }
-
-    public void setIssueValues(List<Issue> issueValues) {
-        this.issueValues = issueValues;
-    }
+//    public List<Issue> getIssueValues() {
+//        return issueValues;
+//    }
+//
+//    public void setIssueValues(List<Issue> issueValues) {
+//        this.issueValues = issueValues;
+//    }
 }

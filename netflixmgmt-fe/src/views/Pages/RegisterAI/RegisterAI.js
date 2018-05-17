@@ -25,9 +25,9 @@ InputGroupText,
 Label,
 Row, } from 'reactstrap';
 
-const API_ROUTE = 'http://localhost:8080/changeRequest/save';
+const API_ROUTE = 'http://localhost:8080/issue/save';
 
-class RegisterCR extends Component{
+class RegisterAI extends Component{
   constructor(props) {
     super(props);
 
@@ -37,31 +37,38 @@ class RegisterCR extends Component{
       name:'',
       type:1,
       description:'',
-      types: []
+      types:[],
+      component:1,
+      components:[]
     };
 
-
-    this.registerCR = this.registerCR.bind(this);
     this.onChange=this.onChange.bind(this);
-
-
+    this.handleSuccess=this.handleSuccess.bind(this);
+    this.handleError=this.handleError.bind(this);
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8080/changeRequestType/all',{})
+    axios.get('http://localhost:8080/issueType/all',{})
     .then( response => {
         this.setState({types: response.data});
 
-    })
+    });
+
+    axios.get('http://localhost:8080/component/all',{})
+    .then( response => {
+        this.setState({components: response.data});
+
+    });
 
 
   }
 
-  registerCR(event){
+  registerAI(event){
     axios.post(API_ROUTE, {
                   name: this.state.name,
                   description: this.state.description,
-                  changeRequestType: {id:this.state.type}
+                  issueType: {id:this.state.type},
+                  component: {id:this.state.component}
               })
               .then(this.handleSuccess.bind(this))
               .catch(this.handleError.bind(this));
@@ -71,8 +78,7 @@ class RegisterCR extends Component{
   handleSuccess(response) {
         if(response.data)
         {
-
-            alert('Successfully registered change request!');
+            alert('Successfully registered issue!');
             window.location='/dashboard';
         }
     }
@@ -87,48 +93,63 @@ class RegisterCR extends Component{
 
   onChange(e) {
         this.setState({[e.target.name]:e.target.value});
-
     }
-
 
 
   render(){
     let types = Array.from(this.state.types).map((type) =>
                 <option value={type.id}>{type.name}</option>
             );
+
+    let components = Array.from(this.state.components).map((type) =>
+                <option value={type.id}>{type.name}</option>
+                    );
     return(
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center" >
             <Col md="8">
-            <Form  action="" encType="multipart/form-data" className="form-horizontal">
+            <Form  encType="multipart/form-data" className="form-horizontal">
 
             <Card>
               <CardHeader>
-                <strong>Register Change Request</strong>
+                <strong>Register Availibility Issue</strong>
               </CardHeader>
               <CardBody>
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="text-input">Change Request name</Label>
+                      <Label htmlFor="text-input">Availibility issue name</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input type="text" id="text-input" name="name" placeholder="Name" value={this.state.name} onChange={this.onChange} />
-                      <FormText color="muted">Please enter the name of your change request</FormText>
+                      <FormText color="muted">Please enter the name of your issue</FormText>
                     </Col>
                   </FormGroup>
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="select">Change Request Type</Label>
+                      <Label htmlFor="select">Component</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="select" name="type" id="select" value={this.state.type} onChange={this.onChange}>
+                    <Input type="select" name="type" id="select" value={this.state.component} onChange={this.onChange}>
 
-                        {types}
+                      {components}
 
-                      </Input>
+                    </Input>
+                    </Col>
+                  </FormGroup>
+
+                  <FormGroup row>
+                    <Col md="3">
+                      <Label htmlFor="select">Availibility issue Type</Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                    <Input type="select" name="type" id="select" value={this.state.type} onChange={this.onChange}>
+
+                      {types}
+
+                    </Input>
                     </Col>
                   </FormGroup>
 
@@ -137,7 +158,7 @@ class RegisterCR extends Component{
                       <Label htmlFor="textarea-input">Description</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="textarea" name="description" value={this.state.description} onChange={this.onChange} id="textarea-input" rows="9"
+                      <Input type="textarea" name="description" id="textarea-input" value={this.state.description} onChange={this.onChange} rows="9"
                              placeholder="Content..." />
                     </Col>
                   </FormGroup>
@@ -145,7 +166,7 @@ class RegisterCR extends Component{
 
               </CardBody>
               <CardFooter>
-                <Button size="sm" onClick={event => this.registerCR(event)} color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                <Button onClick={event => this.registerAI(event)} size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
                 <Button type="reset" color="danger"  size="sm"><i className="fa fa-ban"></i> Reset</Button>
                 <Row className="float-right">
                   <Button type="reset" color="secondary"  size="sm">Cancel</Button>
@@ -161,4 +182,4 @@ class RegisterCR extends Component{
   }
 }
 
-export default RegisterCR;
+export default RegisterAI;
