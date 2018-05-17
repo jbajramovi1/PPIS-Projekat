@@ -35,8 +35,11 @@ class RegisterAI extends Component{
     this.state = {
       collapse: true,
       name:'',
-      type:0,
-      description:''
+      type:1,
+      description:'',
+      types:[],
+      component:1,
+      components:[]
     };
 
     this.onChange=this.onChange.bind(this);
@@ -44,10 +47,28 @@ class RegisterAI extends Component{
     this.handleError=this.handleError.bind(this);
   }
 
+  componentDidMount(){
+    axios.get('http://localhost:8080/issueType/all',{})
+    .then( response => {
+        this.setState({types: response.data});
+
+    });
+
+    axios.get('http://localhost:8080/component/all',{})
+    .then( response => {
+        this.setState({components: response.data});
+
+    });
+
+
+  }
+
   registerAI(event){
     axios.post(API_ROUTE, {
                   name: this.state.name,
-                  description: this.state.description
+                  description: this.state.description,
+                  issueType: {id:this.state.type},
+                  component: {id:this.state.component}
               })
               .then(this.handleSuccess.bind(this))
               .catch(this.handleError.bind(this));
@@ -58,7 +79,7 @@ class RegisterAI extends Component{
         if(response.data)
         {
             alert('Successfully registered issue!');
-            //redirect to window
+            window.location='/dashboard';
         }
     }
 
@@ -76,6 +97,13 @@ class RegisterAI extends Component{
 
 
   render(){
+    let types = Array.from(this.state.types).map((type) =>
+                <option value={type.id}>{type.name}</option>
+            );
+
+    let components = Array.from(this.state.components).map((type) =>
+                <option value={type.id}>{type.name}</option>
+                    );
     return(
       <div className="app flex-row align-items-center">
         <Container>
@@ -101,15 +129,14 @@ class RegisterAI extends Component{
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="select">Service</Label>
+                      <Label htmlFor="select">Component</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="select" name="type" id="select">
-                        <option value="0">Please select</option>
-                        <option value="1">Option #1</option>
-                        <option value="2">Option #2</option>
-                        <option value="3">Option #3</option>
-                      </Input>
+                    <Input type="select" name="type" id="select" value={this.state.component} onChange={this.onChange}>
+
+                      {components}
+
+                    </Input>
                     </Col>
                   </FormGroup>
 
@@ -118,12 +145,11 @@ class RegisterAI extends Component{
                       <Label htmlFor="select">Availibility issue Type</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="select" name="type" id="select">
-                        <option value="0">Please select</option>
-                        <option value="1">Option #1</option>
-                        <option value="2">Option #2</option>
-                        <option value="3">Option #3</option>
-                      </Input>
+                    <Input type="select" name="type" id="select" value={this.state.type} onChange={this.onChange}>
+
+                      {types}
+
+                    </Input>
                     </Col>
                   </FormGroup>
 
