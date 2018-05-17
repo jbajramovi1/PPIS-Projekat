@@ -60,7 +60,7 @@ class ChangeStatistics extends Component {
 
   fetchStats() {
     axios.get(API_ROUTE, {
-      headers: {'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmlzYSIsImV4cCI6MTUyNzI2OTkzMn0.0Uv3ZtZfJEgaHDP0O7X6IMgDWVWpU5SnK2UwHxBoWasG2BF24eC385eV9MiAcftuyyGV-Eehg_od2_RyVD1URg'}}
+      headers: {'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmlzYSIsImV4cCI6MTUyNzQxNzMxOH0.n4IlskGFqyl-cNpRUhp3nzTGeXMd6rgJPJ_HZNSEMlrCEciKLcwJA9InhrCza5xmnfSzAxLa7RPEzzd7ammAew'}}
       ).then((response) => {
         let pieData = response.data;
         let newPie = this.state.pie;

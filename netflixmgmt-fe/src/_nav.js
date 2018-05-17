@@ -229,6 +229,16 @@ export default {
           url: '/500',
           icon: 'icon-star',
         },
+        {
+            name: 'Changestatistics',
+            url: '/changestatistics',
+            icon: 'icon-star',
+        },
+        {
+            name: 'ChangeRequests',
+            url: '/changerequests',
+            icon: 'icon-star',
+        }
       ],
     }
   ],
