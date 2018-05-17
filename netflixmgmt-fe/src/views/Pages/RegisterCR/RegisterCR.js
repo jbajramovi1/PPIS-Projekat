@@ -35,7 +35,7 @@ class RegisterCR extends Component{
     this.state = {
       collapse: true,
       name:'',
-      type:0,
+      type:1,
       description:'',
       types: []
     };
@@ -47,20 +47,21 @@ class RegisterCR extends Component{
 
   }
 
-  componentWillMount(){
-    axios.get('http://localhost:8080/changeRequestType/all')
+  componentDidMount(){
+    axios.get('http://localhost:8080/changeRequestType/all',{})
     .then( response => {
-        console.log(response);
         this.setState({types: response.data});
+
     })
 
-    console.log(this.state.types);
+
   }
 
   registerCR(event){
     axios.post(API_ROUTE, {
                   name: this.state.name,
-                  description: this.state.description
+                  description: this.state.description,
+                  changeRequestType: {id:this.state.type}
               })
               .then(this.handleSuccess.bind(this))
               .catch(this.handleError.bind(this));
@@ -70,8 +71,9 @@ class RegisterCR extends Component{
   handleSuccess(response) {
         if(response.data)
         {
+
             alert('Successfully registered change request!');
-            //redirect to window
+            window.location='/dashboard';
         }
     }
 
@@ -85,10 +87,15 @@ class RegisterCR extends Component{
 
   onChange(e) {
         this.setState({[e.target.name]:e.target.value});
+
     }
 
 
+
   render(){
+    let types = Array.from(this.state.types).map((type) =>
+                <option value={type.id}>{type.name}</option>
+            );
     return(
       <div className="app flex-row align-items-center">
         <Container>
@@ -107,7 +114,7 @@ class RegisterCR extends Component{
                       <Label htmlFor="text-input">Change Request name</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="text" id="text-input" name="name" placeholder="Name" />
+                      <Input type="text" id="text-input" name="name" placeholder="Name" value={this.state.name} onChange={this.onChange} />
                       <FormText color="muted">Please enter the name of your change request</FormText>
                     </Col>
                   </FormGroup>
@@ -117,11 +124,10 @@ class RegisterCR extends Component{
                       <Label htmlFor="select">Change Request Type</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="select" name="type" id="select">
-                        <option value="0">Please select</option>
-                        <option value="1">Option #1</option>
-                        <option value="2">Option #2</option>
-                        <option value="3">Option #3</option>
+                      <Input type="select" name="type" id="select" value={this.state.type} onChange={this.onChange}>
+
+                        {types}
+
                       </Input>
                     </Col>
                   </FormGroup>
@@ -131,7 +137,7 @@ class RegisterCR extends Component{
                       <Label htmlFor="textarea-input">Description</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="textarea" name="description" id="textarea-input" rows="9"
+                      <Input type="textarea" name="description" value={this.state.description} onChange={this.onChange} id="textarea-input" rows="9"
                              placeholder="Content..." />
                     </Col>
                   </FormGroup>
@@ -139,7 +145,7 @@ class RegisterCR extends Component{
 
               </CardBody>
               <CardFooter>
-                <Button size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                <Button size="sm" onClick={event => this.registerCR(event)} color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
                 <Button type="reset" color="danger"  size="sm"><i className="fa fa-ban"></i> Reset</Button>
                 <Row className="float-right">
                   <Button type="reset" color="secondary"  size="sm">Cancel</Button>

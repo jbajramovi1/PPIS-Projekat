@@ -18,8 +18,8 @@ public class ChangeRequestType {
     private String name;
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "changeRequestType", targetEntity = ChangeRequest.class, cascade = CascadeType.ALL)
-    private List<ChangeRequest> changeRequestValues = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "changeRequestType", targetEntity = ChangeRequest.class, cascade = CascadeType.ALL)
+//    private List<ChangeRequest> changeRequestValues = new ArrayList<>();
 
     public ChangeRequestType() {
     }
@@ -53,11 +53,11 @@ public class ChangeRequestType {
         this.description = description;
     }
 
-    public List<ChangeRequest> getChangeRequestValues() {
-        return changeRequestValues;
-    }
-
-    public void setChangeRequestValues(List<ChangeRequest> changeRequestValues) {
-        this.changeRequestValues = changeRequestValues;
-    }
+//    public List<ChangeRequest> getChangeRequestValues() {
+//        return changeRequestValues;
+//    }
+//
+//    public void setChangeRequestValues(List<ChangeRequest> changeRequestValues) {
+//        this.changeRequestValues = changeRequestValues;
+//    }
 }
