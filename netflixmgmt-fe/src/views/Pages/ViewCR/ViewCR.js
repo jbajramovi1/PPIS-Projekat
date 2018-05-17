@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 import {
 Container,
@@ -27,42 +26,41 @@ InputGroupText,
 Label,
 Row, } from 'reactstrap';
 
-interface ChangeRequest {
-  id: long;
-  name: string;
-  description: string;
-  revisionComment: string;
-  account: string;
-  changeRequestStatus: string;
-  changeRequestType: string;
-}
+const API_ROUTE = 'http://localhost:8080/changeRequest/show/';
 
-const protocol = window.location.protocol;
-const hostname = window.location.hostname;
-
-class ViewCR extends Component{
-	constructor(props) {
+	class ViewCR extends Component{
+		constructor(props) {
 		super(props);
+
 		this.state = {
-		  changeRequest: {}
+		  change_request: {}
 		};
 	}
 
-	componentDidMount() {
-		axios.get('localhost:8080/changerequest?id='+this.props.match.params.id)
-		  .then(res => {
-			this.setState({ change_request: res.data });
-			console.log(this.state.change_request);
-		  });
-	}
 
-  delete(id){
-    console.log(id);
-    axios.delete('localhost:8080/changerequest?id='+id)
-      .then((result) => {
-        this.props.history.push("/")
-      });
-  }
+// 	componentDidMount() {
+// 		axios.get('localhost:8080/changerequest?id='+this.props.match.params.id)
+// 		  .then(res => {
+// 			this.setState({ change_request: res.data });
+// 			console.log(this.state.change_request);
+// 		  });
+// 	}
+
+//   delete(id){
+//     console.log(id);
+//     axios.delete('localhost:8080/changerequest?id='+id)
+//       .then((result) => {
+//         this.props.history.push("/")
+//       });
+//   }
+
+  
+	componentDidMount(){
+		axios.get(API_ROUTE + this.props.match.params.id)
+				  .then(res => {this.setState({ change_request: res.data })});
+	}
+	
+
   render(){
     return(
       <div className="app flex-row align-items-center">
@@ -80,6 +78,7 @@ class ViewCR extends Component{
                     </Col>
                     <Col xs="12" md="9">
                       <FormText color="muted">#24031996</FormText>
+					  //<FormText color="muted">{this.state.change_request.id}</FormText>
                     </Col>
                   </FormGroup>
 
@@ -88,7 +87,8 @@ class ViewCR extends Component{
                       <Label>Change Request Name:</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <FormText color="muted">Placeholder name</FormText>
+					<FormText color="muted">Placeholder Name</FormText>
+					//<FormText color="muted">{this.state.change_request.name}</FormText>
                     </Col>
                   </FormGroup>
 
