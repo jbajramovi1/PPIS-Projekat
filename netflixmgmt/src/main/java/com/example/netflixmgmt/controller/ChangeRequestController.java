@@ -13,6 +13,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,8 +44,8 @@ public class ChangeRequestController {
     		return ResponseEntity.ok(allRequests);
 	}	
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getRequestById(@RequestParam("id") Long id) {
+	@RequestMapping(method = RequestMethod.GET, value="/show/{id}")
+	public ResponseEntity<?> getRequestById(@PathVariable Long id) {
 		ChangeRequest request = changeService.getById(id);
 		
 		if (request == null)

@@ -18,6 +18,7 @@ public class Issue {
 
     private String name;
     private Date date;
+    private String description;
 
     @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY)
     private Account account;
@@ -37,14 +38,16 @@ public class Issue {
     public Issue() {
     }
 
-    public Issue(String name, Date date, Account account, Component component, IssueStatus issueStatus, IssueType issueType) {
+    public Issue(String name, String description, Date date, Account account, Component component, IssueStatus issueStatus, IssueType issueType) {
         this.name = name;
         this.date = date;
+        this.description=description;
         this.account=account;
         this.component = component;
         this.issueStatus = issueStatus;
         this.issueType = issueType;
     }
+
 
     public Long getId() {
         return id;
@@ -68,6 +71,15 @@ public class Issue {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Component getComponent() {

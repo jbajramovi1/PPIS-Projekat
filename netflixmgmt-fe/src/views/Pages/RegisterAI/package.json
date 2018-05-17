@@ -1,0 +1,6 @@
+{
+  "name":"RegisterAI",
+  "version":"0.0.0",
+  "private":true,
+  "main":"./RegisterAI.js"
+}

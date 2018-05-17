@@ -21,6 +21,7 @@ public class IssueService {
         Issue issue=new Issue();
         issue.setName(data.getName());
         issue.setDate(data.getDate());
+        issue.setDescription(data.getDescription());
         issue.setAccount(data.getAccount());
         issue.setComponent(data.getComponent());
         issue.setIssueStatus(data.getIssueStatus());
