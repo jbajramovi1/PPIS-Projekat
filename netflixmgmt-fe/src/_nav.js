@@ -37,12 +37,23 @@ export default {
     },
     {
         name: 'View all requests',
-        url: '/undefined',
+        url: '/changerequests',
         icon: 'icon-calculator',
         badge: {
             variant: 'info',
             text: '',
-        },
-    }
-  ]
+        }
+    },
+
+        {
+            name: 'Change Statistics',
+            url: '/changestatistics',
+            icon: 'icon-star',
+          badge: {
+            variant: 'info',
+            text: '',
+          }
+        }
+      
+      ]
 };
