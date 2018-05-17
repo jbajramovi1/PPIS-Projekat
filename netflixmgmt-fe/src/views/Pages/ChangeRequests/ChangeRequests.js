@@ -10,38 +10,77 @@ const API_ROUTE = 'http://localhost:8080/changeRequest/all';
 
 class ChangeRequests extends Component {
 
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //     requests:[]
-    //     }
-    //     ;
-    //
-    //
-    // }
-    //
-    //
-    // componentDidMount() {
-    //     axios.get('http://localhost:8080/changeRequest/all',{})
-    //         .then( response => {
-    //             this.setState({requests: response.data});
-    //         })
-    // }
+    constructor(props){
+        super(props);
+        this.state = {
+        requests:[],
+        changeRequests:[
+            {
+                "id": "",
+                "name" : "",
+                "description": "",
+                "revisionComment": "",
+                "account": {
+                    "id": "",
+                        "username": "",
+                        "password": "",
+                        "role": {
+                            "id": "",
+                            "title": ""
+                              }
+                        },
+                "changeRequestStatus": {
+                        "id": "",
+                        "name": ""
+                         },
+                "changeRequestType": {
+                        "id": "",
+                        "name": "",
+                        "description": ""
+                          }
+            }
+        ]
+        }
+        ;
+    }
+
+
+
+    componentDidMount() {
+        axios.get('http://localhost:8080/changeRequest/all',{})
+            .then( response => {
+                this.setState({changeRequests: response.data});
+
+
+            })
+    }
 
     render() {
-        // let changeRequests = Array.from(this.state.requests).map((request) =>
-        //     <option value={request.name}>{request.description}</option>
-        // );
-
         return (
-            <div className="app flex-row align-items-center">
-                <Container>
-                    <Row>
-                        <h1>Change Requests</h1>
-                    </Row>
-                </Container>
+           // <div className="app flex-row align-items-center">
 
-            </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.changeRequests.map((request) =>
+                        <tr key={request.id}>
+
+                            <th scope="row">{request.id}</th>
+                            <td>{request.name}</td>
+                            <td>{request.changeRequestStatus.name}</td>
+                            <td>{request.changeRequestType.name}</td>
+                        </tr>)
+                    }
+                    </tbody>
+                </table>
+            //</div>
         );
     }
 }
