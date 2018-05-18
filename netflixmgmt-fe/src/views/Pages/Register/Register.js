@@ -3,7 +3,7 @@ import { Button, Card, CardBody, Col, Container, Input, InputGroup, InputGroupAd
 import axios from 'axios';
 import { Redirect } from 'react-router';
 
-const API_ROUTE = 'http://localhost:8080/register/save';
+const API_ROUTE = 'http://localhost:8080/account/save';
 
 class Register extends Component {
 
@@ -15,7 +15,7 @@ class Register extends Component {
       email: '',
       pass: '',
       repeatPass: '',
-      authenticated: false
+      registered: false
     }
 
     this.updateState = this.updateState.bind(this);
@@ -28,19 +28,36 @@ class Register extends Component {
   }
 
   register (event) {
+
+    let registerData = {
+      username: this.state.username,
+      password: this.state.pass,
+      email: this.state.email
+    }
+
     if (this.state.pass === this.state.repeatPass) {
-      axios.post(API_ROUTE, JSON.stringify(this.state))
+      axios.post(API_ROUTE, registerData)
         .then(response => {
-          localStorage.setItem('token', response);
-          this.state.authenticated = true;
+          this.setState({
+            registered: true
+          });
         })
         .catch(function (error) {
           console.log(error);
+          alert("Unsuccessful registration, please check your input!");
         });
+    }
+    else {
+      alert("Password and Repeat Password don't match!");
     }
   }
 
   render() {
+
+    if (this.state.registered) {
+      return <Redirect to="/login"/>
+    }
+
     return (
       <div className="app flex-row align-items-center">
         <Container>

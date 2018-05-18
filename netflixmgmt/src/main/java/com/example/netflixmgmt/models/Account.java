@@ -1,6 +1,11 @@
 package com.example.netflixmgmt.models;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
@@ -12,10 +17,20 @@ public class Account {
     private Long id;
 
     @Column(unique = true)
+    @NotNull
+    @NotBlank
+    @Length(min = 3)
     private String username;
 
+    @NotNull
+    @NotBlank
+    @Length(min = 3)
     private String password;
 
+    @NotNull
+    @NotBlank
+    @Length(min = 5)
+    private String email;
 
     @ManyToOne(targetEntity = Role.class)
     private Role role;
@@ -58,15 +73,24 @@ public class Account {
         this.password = password;
     }
 
-    public Account(Long id, String username, String password, Role role) {
+    public Account(Long id, String username, String password, Role role, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role=role;
+        this.role = role;
+        this.email = email;
     }
 
     public Account() {
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 //    public List<Issue> getIssueValues() {
