@@ -20,20 +20,20 @@ public class Issue {
     private Date date;
     private String description;
 
-    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Account.class, fetch = FetchType.EAGER)
     private Account account;
 
-    @ManyToOne(targetEntity = Component.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Component.class, fetch = FetchType.EAGER)
     private Component component;
 
-    @ManyToOne(targetEntity = IssueStatus.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = IssueStatus.class, fetch = FetchType.EAGER)
     private IssueStatus issueStatus;
 
-    @ManyToOne(targetEntity = IssueType.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = IssueType.class, fetch = FetchType.EAGER)
     private IssueType issueType;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue", targetEntity = IssueStatusLog.class, cascade = CascadeType.ALL)
-    private List<IssueStatusLog> issueStatusLogValues = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue", targetEntity = IssueStatusLog.class, cascade = CascadeType.ALL)
+//    private List<IssueStatusLog> issueStatusLogValues = new ArrayList<>();
 
     public Issue() {
     }
@@ -114,11 +114,11 @@ public class Issue {
         this.issueType = issueType;
     }
 
-    public List<IssueStatusLog> getIssueStatusLogValues() {
-        return issueStatusLogValues;
-    }
-
-    public void setIssueStatusLogValues(List<IssueStatusLog> issueStatusLogValues) {
-        this.issueStatusLogValues = issueStatusLogValues;
-    }
+//    public List<IssueStatusLog> getIssueStatusLogValues() {
+//        return issueStatusLogValues;
+//    }
+//
+//    public void setIssueStatusLogValues(List<IssueStatusLog> issueStatusLogValues) {
+//        this.issueStatusLogValues = issueStatusLogValues;
+//    }
 }
