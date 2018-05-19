@@ -39,94 +39,94 @@ class ViewCR extends Component{
   
 	componentDidMount(){
 		axios.get(API_ROUTE + this.props.match.params.id)
-				  .then(res => {this.setState({ change_request: res.data })});
+		.then(res => {this.setState({ change_request: res.data })});
 	}
 		
 	render(){
-    return(
-      <div className="app flex-row align-items-center">
-        <Container>
-          <Row className="justify-content-center" >
-            <Col md="8">
-            <Card>
-              <CardHeader>
-                <strong>View Change Request</strong>
-              </CardHeader>
-              <CardBody>
-				  <FormGroup row>
-                    <Col md="3">
-                      <Label>Change Request ID:</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-					  <FormText color="muted">#{this.state.change_request.id}</FormText>
-                    </Col>
-                  </FormGroup>
-			  
-                  <FormGroup row>
-                    <Col md="3">
-                      <Label>Change Request Name:</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-					<FormText color="muted">{this.state.change_request.name}</FormText>
-                    </Col>
-                  </FormGroup>
+		return(
+		  <div className="app flex-row align-items-center">
+			<Container>
+			  <Row className="justify-content-center" >
+				<Col md="8">
+				<Card>
+				  <CardHeader>
+					<strong>View Change Request</strong>
+				  </CardHeader>
+				  <CardBody>
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request ID:</Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <FormText color="muted">#{this.state.change_request.id}</FormText>
+						</Col>
+					  </FormGroup>
 				  
-				  <FormGroup row>
-                    <Col md="3">
-                      <Label>Change Request Submitted By:</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <FormText color="muted">{this.state.change_request.account}</FormText>
-                    </Col>
-                  </FormGroup>
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Name:</Label>
+						</Col>
+						<Col xs="12" md="9">
+						<FormText color="muted">{this.state.change_request.name}</FormText>
+						</Col>
+					  </FormGroup>
+					  
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Submitted By:</Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <FormText color="muted">{this.state.change_request.account}</FormText>
+						</Col>
+					  </FormGroup>
 
-                  <FormGroup row>
-                    <Col md="3">
-                      <Label>Change Request Type: </Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <FormText color="muted">{this.state.change_request.changeRequestType}</FormText>
-                    </Col>
-                  </FormGroup>
-				  
-				  <FormGroup row>
-                    <Col md="3">
-                      <Label>Change Request Status: </Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <FormText color="muted">{this.state.change_request.changeRequestStatus}</FormText>
-                    </Col>
-                  </FormGroup>
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Type: </Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <FormText color="muted">{this.state.change_request.changeRequestType}</FormText>
+						</Col>
+					  </FormGroup>
+					  
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Status: </Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <FormText color="muted">{this.state.change_request.changeRequestStatus}</FormText>
+						</Col>
+					  </FormGroup>
 
-                  <FormGroup row>
-                    <Col md="3">
-                      <Label>Change Request Description: </Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <FormText color="muted">{this.state.change_request.description}</FormText>
-                    </Col>
-                  </FormGroup>
-				  
-				  <FormGroup row>
-                    <Col md="3">
-                      <Label>Change Request Revision Comment:</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <FormText color="muted">{this.state.change_request.revisionComment}</FormText>
-                    </Col>
-                  </FormGroup>
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Description: </Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <FormText color="muted">{this.state.change_request.description}</FormText>
+						</Col>
+					  </FormGroup>
+					  
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Revision Comment:</Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <FormText color="muted">{this.state.change_request.revisionComment}</FormText>
+						</Col>
+					  </FormGroup>
 
-              </CardBody>
-              <CardFooter>
-				<button type = "button" class="btn btn-outline-primary btn-lg btn-block">Edit</button>
-              </CardFooter>
-            </Card>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
+				  </CardBody>
+				  <CardFooter>
+					<button type = "button" class="btn btn-outline-primary btn-lg btn-block">Edit</button>
+				  </CardFooter>
+				</Card>
+				</Col>
+			  </Row>
+			</Container>
+		  </div>
+		);
+	}
 }
 
 export default ViewCR;

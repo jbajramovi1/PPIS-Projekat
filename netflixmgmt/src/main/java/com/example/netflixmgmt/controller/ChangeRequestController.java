@@ -94,8 +94,8 @@ public class ChangeRequestController {
 		}
 	}
 	
-    @RequestMapping(method=RequestMethod.PUT, value="/{id}/update")
-    public ResponseEntity<?> updateChangeRequest(@PathVariable Long id, @RequestBody ChangeRequest changeRequest) {
+    @RequestMapping(method=RequestMethod.PUT, value="/update")
+    public ResponseEntity<?> updateChangeRequest(@RequestParam("id") Long id, @RequestBody ChangeRequest changeRequest) {
     	if (changeRequest == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
     	else
