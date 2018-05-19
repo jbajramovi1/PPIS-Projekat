@@ -5,7 +5,8 @@ import Register from './Register';
 import RegisterCR from './RegisterCR';
 import RegisterAI from './RegisterAI';
 import ViewCR from './ViewCR';
+import EditCR from './EditCR';
 
 export {
-  Login, Page404, Page500, Register, RegisterCR, ViewCR, RegisterAI
+  Login, Page404, Page500, Register, RegisterCR, ViewCR, RegisterAI, EditCR
 };
