@@ -1,0 +1,6 @@
+{
+  "name":"ViewContract",
+  "version":"0.0.0",
+  "private":true,
+  "main":"./ViewContract.js"
+}

@@ -21,10 +21,11 @@ public class AccountService {
     private IRoleRepository roleRepository;
 
     public Account createAccount(Account data){
-        // TODO fix unique constraint exception!a
+        // TODO fix unique constraint exception!
         Account account=new Account();
         account.setUsername(data.getUsername());
         account.setPassword(data.getPassword());
+        account.setEmail(data.getEmail());
         Role role = roleRepository.findRoleByTitle("ROLE_USER");
 
         if (role == null)

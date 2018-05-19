@@ -15,39 +15,43 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.netflixmgmt.models.Account;
 import com.example.netflixmgmt.services.AccountService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/account")
 public class AccountController {
-	
+
 	@Autowired
 	AccountService accService;
-	
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<Object> findAll(){
 		List<Account> allAccounts = accService.getAll();
 
 		if (allAccounts.size() == 0)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No account has been found!");
-    	else	   						
+    	else
     		return ResponseEntity.ok(allAccounts);
-	}	
-	
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getUserById(@RequestParam("id") Long id) {
 		Account acc = accService.getById(id);
-		
+
 		if (acc == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This account doesn't exist!");
-    	else	   						
+    	else
     		return ResponseEntity.ok(acc);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody Account acc) {
+	public ResponseEntity<?> saveUser(@Valid @RequestBody Account acc) {
 		if (acc == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
-		else
-			return ResponseEntity.ok(accService.createAccount(acc));
+		else {
+			accService.createAccount(acc);
+			return ResponseEntity.ok().build();
+		}
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)

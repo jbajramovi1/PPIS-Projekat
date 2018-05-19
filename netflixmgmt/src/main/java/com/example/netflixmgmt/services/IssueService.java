@@ -4,10 +4,13 @@ import com.example.netflixmgmt.models.Issue;
 import com.example.netflixmgmt.models.IssueStatus;
 import com.example.netflixmgmt.models.IssueType;
 import com.example.netflixmgmt.repositories.IIssueRepository;
+import com.example.netflixmgmt.repositories.IIssueStatusRepository;
+import com.example.netflixmgmt.repositories.IIssueTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,14 +20,17 @@ public class IssueService {
     @Autowired
     private IIssueRepository issueRepository;
 
+    @Autowired
+    private IIssueStatusRepository issueStatusRepository;
+
     public Issue createIssue(Issue data){
         Issue issue=new Issue();
         issue.setName(data.getName());
-        issue.setDate(data.getDate());
+        issue.setDate(new Date());
         issue.setDescription(data.getDescription());
         issue.setAccount(data.getAccount());
         issue.setComponent(data.getComponent());
-        issue.setIssueStatus(data.getIssueStatus());
+        issue.setIssueStatus(issueStatusRepository.findIssueStatusById(Long.valueOf(3)));
         issue.setIssueType(data.getIssueType());
         return issueRepository.save(issue);
     }
