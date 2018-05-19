@@ -17,11 +17,11 @@ public class IssueStatus {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueStatus", targetEntity = Issue.class, cascade = CascadeType.ALL)
-    private List<Issue> issueValues = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueStatus", targetEntity = IssueStatusLog.class, cascade = CascadeType.ALL)
-    private List<IssueStatusLog> issueStatusLogValues = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueStatus", targetEntity = Issue.class, cascade = CascadeType.ALL)
+//    private List<Issue> issueValues = new ArrayList<>();
+//
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "issueStatus", targetEntity = IssueStatusLog.class, cascade = CascadeType.ALL)
+//    private List<IssueStatusLog> issueStatusLogValues = new ArrayList<>();
 
     public IssueStatus() {
     }
@@ -46,19 +46,19 @@ public class IssueStatus {
         this.name = name;
     }
 
-    public List<Issue> getIssueValues() {
-        return issueValues;
-    }
-
-    public void setIssueValues(List<Issue> issueValues) {
-        this.issueValues = issueValues;
-    }
-
-    public List<IssueStatusLog> getIssueStatusLogValues() {
-        return issueStatusLogValues;
-    }
-
-    public void setIssueStatusLogValues(List<IssueStatusLog> issueStatusLogValues) {
-        this.issueStatusLogValues = issueStatusLogValues;
-    }
+//    public List<Issue> getIssueValues() {
+//        return issueValues;
+//    }
+//
+//    public void setIssueValues(List<Issue> issueValues) {
+//        this.issueValues = issueValues;
+//    }
+//
+//    public List<IssueStatusLog> getIssueStatusLogValues() {
+//        return issueStatusLogValues;
+//    }
+//
+//    public void setIssueStatusLogValues(List<IssueStatusLog> issueStatusLogValues) {
+//        this.issueStatusLogValues = issueStatusLogValues;
+//    }
 }

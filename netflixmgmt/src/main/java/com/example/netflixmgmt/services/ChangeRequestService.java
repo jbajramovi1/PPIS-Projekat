@@ -38,7 +38,7 @@ public class ChangeRequestService {
         ChangeRequest changeRequest=new ChangeRequest();
         changeRequest.setName(data.getName());
         changeRequest.setDescription(data.getDescription());
-        changeRequest.setChangeRequestStatus(data.getChangeRequestStatus());
+        changeRequest.setChangeRequestStatus(changeRequestStatusRepository.findChangeRequestStatusById(Long.valueOf(3))); //on hold
         changeRequest.setChangeRequestType(data.getChangeRequestType());
         changeRequest.setAccount(data.getAccount());
         changeRequest.setRevisionComment(data.getRevisionComment());
