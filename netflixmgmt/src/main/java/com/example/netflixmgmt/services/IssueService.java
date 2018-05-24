@@ -1,8 +1,10 @@
 package com.example.netflixmgmt.services;
 
+import com.example.netflixmgmt.models.Component;
 import com.example.netflixmgmt.models.Issue;
 import com.example.netflixmgmt.models.IssueStatus;
 import com.example.netflixmgmt.models.IssueType;
+import com.example.netflixmgmt.repositories.IComponentRepository;
 import com.example.netflixmgmt.repositories.IIssueRepository;
 import com.example.netflixmgmt.repositories.IIssueStatusRepository;
 import com.example.netflixmgmt.repositories.IIssueTypeRepository;
@@ -12,7 +14,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -23,6 +27,9 @@ public class IssueService {
 
     @Autowired
     private IIssueStatusRepository issueStatusRepository;
+
+    @Autowired
+    private IComponentRepository componentRepository;
 
     public Issue createIssue(Issue data){
         Issue issue=new Issue();
@@ -65,5 +72,22 @@ public class IssueService {
         if (data.getIssueStatus() != null) issue.setIssueStatus(data.getIssueStatus());
         if (data.getIssueType() != null) issue.setIssueType(data.getIssueType());
         return issueRepository.save(issue);
+    }
+
+    public Map<String, Integer> getIssueStatistics(){
+        Map<String, Integer> results = new LinkedHashMap<>();
+
+//
+        results.put("AllIssues", issueRepository.findAll().size());
+
+        for (Component component:
+                componentRepository.findAll()) {
+            results.put(component.getName(),
+                    issueRepository.findIssueByComponent(component).size());
+
+        }
+
+        return results;
+
     }
 }

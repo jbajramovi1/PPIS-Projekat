@@ -63,7 +63,26 @@ export default {
             variant: 'info',
             text: '',
           }
+        },
+        {
+          name: 'Issue statistics',
+          url: '/issuestatistics',
+          icon: 'icon-calculator',
+          badge: {
+            variant: 'info',
+            text: '',
+          }
+        },
+        {
+          name: 'View all contracts',
+          url: '/contracts',
+          icon: 'icon-calculator',
+          badge: {
+            variant: 'info',
+            text: '',
+          }
         }
+
 
       ]
 };

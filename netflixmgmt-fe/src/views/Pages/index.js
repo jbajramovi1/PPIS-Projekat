@@ -10,9 +10,11 @@ import ViewCR from './ViewCR';
 import Issues from './Issues';
 import EditCR from './EditCR';
 import ViewContract from './ViewContract';
+import Contracts from './Contracts';
+import IssueStatistics from './IssueStatistics';
 
 
 export {
-  Login, Page404, Page500, Register, RegisterCR, ViewCR, RegisterAI, ChangeStatistics, ChangeRequests, ViewContract, Issues, EditCR
+  Login, Page404, Page500, Register, RegisterCR, ViewCR, RegisterAI, ChangeStatistics, ChangeRequests, ViewContract, Issues, EditCR, Contracts, IssueStatistics
 
 };
