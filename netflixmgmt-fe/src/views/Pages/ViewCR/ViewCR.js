@@ -33,15 +33,39 @@ class ViewCR extends Component{
 		super(props);
 
 		this.state = {
-		  change_request: {}
-		};		
+		  change_request:
+			{
+			"id": "",
+			"name" : "",
+			"description": "",
+			"revisionComment": "",
+			"account": {
+					"id": "",
+							"username": "",
+							"password": "",
+							"role": {
+									"id": "",
+									"title": ""
+										}
+							},
+			"changeRequestStatus": {
+							"id": "",
+							"name": ""
+							 },
+			"changeRequestType": {
+							"id": "",
+							"name": "",
+							"description": ""
+								}
 	}
-  
+		};
+	}
+
 	componentDidMount(){
 		axios.get(API_ROUTE + this.props.match.params.id)
-		.then(res => {this.setState({ change_request: res.data })});
+		.then(res => {this.setState({ change_request: res.data });console.log(res.data);});
 	}
-		
+
 	render(){
 		return(
 		  <div className="app flex-row align-items-center">
@@ -61,7 +85,7 @@ class ViewCR extends Component{
 						  <FormText color="muted">#{this.state.change_request.id}</FormText>
 						</Col>
 					  </FormGroup>
-				  
+
 					  <FormGroup row>
 						<Col md="3">
 						  <Label>Change Request Name:</Label>
@@ -70,13 +94,13 @@ class ViewCR extends Component{
 						<FormText color="muted">{this.state.change_request.name}</FormText>
 						</Col>
 					  </FormGroup>
-					  
+
 					  <FormGroup row>
 						<Col md="3">
 						  <Label>Change Request Submitted By:</Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.account}</FormText>
+						  <FormText color="muted">{this.state.change_request.account.username}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -85,16 +109,16 @@ class ViewCR extends Component{
 						  <Label>Change Request Type: </Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.changeRequestType}</FormText>
+						  <FormText color="muted">{this.state.change_request.changeRequestType.name}</FormText>
 						</Col>
 					  </FormGroup>
-					  
+
 					  <FormGroup row>
 						<Col md="3">
 						  <Label>Change Request Status: </Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.changeRequestStatus}</FormText>
+						  <FormText color="muted">{this.state.change_request.changeRequestStatus.name}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -106,7 +130,7 @@ class ViewCR extends Component{
 						  <FormText color="muted">{this.state.change_request.description}</FormText>
 						</Col>
 					  </FormGroup>
-					  
+
 					  <FormGroup row>
 						<Col md="3">
 						  <Label>Change Request Revision Comment:</Label>
