@@ -1,8 +1,6 @@
 package com.example.netflixmgmt.controller;
 
-import com.example.netflixmgmt.models.ChangeRequest;
-import com.example.netflixmgmt.models.ChangeRequestType;
-import com.example.netflixmgmt.services.ChangeRequestTypeService;
+import java.util.List;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.example.netflixmgmt.models.ChangeRequestStatus;
+import com.example.netflixmgmt.models.ChangeRequestType;
+import com.example.netflixmgmt.services.ChangeRequestStatusService;
 
 @RestController
-@RequestMapping(path = "/changeRequestType")
-public class ChangeRequestTypeController {
+@RequestMapping(path = "/changeRequestStatus")
+public class ChangeRequestStatusController {
     @Autowired
-    ChangeRequestTypeService changeRequestTypeService;
+    ChangeRequestStatusService changeRequestStatusService;
 
     @RequestMapping(value = "/all",  method = RequestMethod.GET)
     public ResponseEntity<Object> findAll(){
-        List<ChangeRequestType> allRequests = changeRequestTypeService.getAll();
+        List<ChangeRequestStatus> allRequests = changeRequestStatusService.getAll();
 
         if (allRequests.size() == 0)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No change request type has been found!");
@@ -33,18 +33,18 @@ public class ChangeRequestTypeController {
             return ResponseEntity.ok(allRequests);
     }
     
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ResponseEntity<?> saveChangeRequestType(@RequestBody ChangeRequestType type) {
-		if (type == null)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+	public ResponseEntity<?> saveChangeRequestStatus(@RequestBody ChangeRequestStatus status) {
+		if (status == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
 		else
-			return ResponseEntity.ok(changeRequestTypeService.createChangeRequestType(type));
+			return ResponseEntity.ok(changeRequestStatusService.createChangeRequestStatus(status));
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteChangeRequestType(@RequestParam("id") Long id) {
+	public ResponseEntity<?> deleteChangeRequestStatus(@RequestParam("id") Long id) {
 		try {
-			changeRequestTypeService.deleteById(id);
+			changeRequestStatusService.deleteById(id);
 			return ResponseEntity.ok("");
 		} catch (ServiceException e){
 	    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
@@ -52,12 +52,12 @@ public class ChangeRequestTypeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/{id}")
-	public ResponseEntity<?> getRequestTypeById(@PathVariable Long id) {
-		ChangeRequestType type = changeRequestTypeService.getById(id);
+	public ResponseEntity<?> getRequestStatusById(@PathVariable Long id) {
+		ChangeRequestStatus status = changeRequestStatusService.getById(id);
 		
-		if (type == null)
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This change request type doesn't exist!");
+		if (status == null)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This change request status doesn't exist!");
     	else	   						
-    		return ResponseEntity.ok(type);
+    		return ResponseEntity.ok(status);
 	}
 }

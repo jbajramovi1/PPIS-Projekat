@@ -7,11 +7,12 @@ import ChangeStatistics from './ChangeStatistics';
 import ChangeRequests from './ChangeRequests';
 import RegisterAI from './RegisterAI';
 import ViewCR from './ViewCR';
-import ViewContract from './ViewContract';
 import Issues from './Issues';
+import EditCR from './EditCR';
+import ViewContract from './ViewContract';
 
 
 export {
-  Login, Page404, Page500, Register, RegisterCR, ViewCR, RegisterAI, ChangeStatistics, ChangeRequests, ViewContract, Issues
+  Login, Page404, Page500, Register, RegisterCR, ViewCR, RegisterAI, ChangeStatistics, ChangeRequests, ViewContract, Issues, EditCR
 
 };

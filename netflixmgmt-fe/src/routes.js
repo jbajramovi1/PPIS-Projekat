@@ -4,6 +4,7 @@ import {
 import { RegisterCR } from './views/Pages';
 import { RegisterAI } from './views/Pages';
 import { ViewCR } from './views/Pages';
+import { EditCR } from './views/Pages';
 import {ChangeStatistics} from './views/Pages';
 import {ChangeRequests} from './views/Pages';
 import {ViewContract} from './views/Pages';
@@ -18,6 +19,7 @@ const routes = [
   { path: '/registercr', name: 'RegisterChangeRequest', component: RegisterCR},
   { path: '/registerai', name: 'RegisterAvailibilityIssue', component: RegisterAI},
   { path: '/viewcr/:id', name: 'ViewChangeRequest', component: ViewCR},
+  { path: '/editcr/:id', name: 'EditChangeRequest', component: EditCR},
   { path: '/changestatistics', name: 'ChangeStatistics', component: ChangeStatistics},
   { path: '/changerequests', name: 'ChangeRequests', component: ChangeRequests},
   { path: '/issues', name: 'AvailabilityIssues', component: Issues},
