@@ -68,7 +68,7 @@ class ViewCR extends Component{
 
 	render(){
 		return(
-		  <div className="app flex-row align-items-center">
+		  <div className="app flex-row ">
 			<Container>
 			  <Row className="justify-content-center" >
 				<Col md="8">
@@ -142,7 +142,7 @@ class ViewCR extends Component{
 
 				  </CardBody>
 				  <CardFooter>
-					<button type = "button" class="btn btn-outline-primary btn-lg btn-block">Edit</button>
+					<button type = "button" class="btn btn-cr btn-md btn-block">Back</button>
 				  </CardFooter>
 				</Card>
 				</Col>

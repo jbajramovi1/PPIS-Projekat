@@ -62,7 +62,6 @@ class ChangeRequests extends Component {
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Type</th>
@@ -72,7 +71,6 @@ class ChangeRequests extends Component {
                     {this.state.changeRequests.map((request) =>
                         <tr key={request.id}>
 
-                            <th scope="row">{request.id}</th>
                             <td>{request.name}</td>
                             <td>{request.changeRequestStatus.name}</td>
                             <td>{request.changeRequestType.name}</td>

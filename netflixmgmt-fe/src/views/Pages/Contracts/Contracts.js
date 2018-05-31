@@ -45,7 +45,6 @@ class Contracts extends Component {
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Client</th>
 
@@ -55,7 +54,6 @@ class Contracts extends Component {
                     {this.state.contracts.map((contract) =>
                         <tr key={contract.id}>
 
-                            <th scope="row">{contract.id}</th>
                             <td>{contract.name}</td>
                             <td>{contract.client}</td>
                       </tr>)

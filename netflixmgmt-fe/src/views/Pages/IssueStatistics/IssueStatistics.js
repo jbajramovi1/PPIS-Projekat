@@ -92,14 +92,14 @@ class IssueStatistics extends Component {
   render() {
     return (
 
-        <div className="app flex-row align-items-center">
+        <div className="app flex-row ">
         <Container>
         <Row>
-        <h1>Change Statistics</h1>
+        <h1 className="title-statistics">Availibility issues Statistics</h1>
         </Row>
         <div className="animated fadeIn">
         <CardColumns className="cols-2">
-          <Card>
+          <Card className="card-statistics">
             <CardHeader>
               Pie Chart
               <div className="card-header-actions">

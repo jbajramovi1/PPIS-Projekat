@@ -62,12 +62,12 @@ class Register extends Component {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="6">
+            <Col md="9">
               <Card className="mx-4">
-                <CardBody className="p-4">
+                <CardBody className="p-4 register-card">
                   <h1>Register</h1>
                   <p className="text-muted">Create your account</p>
-                  <InputGroup className="mb-3">
+                  <InputGroup className="mb-3 input-register">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="icon-user"></i>
@@ -79,7 +79,7 @@ class Register extends Component {
                         value={this.state.username}
                         onChange={this.updateState}/>
                   </InputGroup>
-                  <InputGroup className="mb-3">
+                  <InputGroup className="mb-3 input-register">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>@</InputGroupText>
                     </InputGroupAddon>
@@ -89,7 +89,7 @@ class Register extends Component {
                         value={this.state.email}
                         onChange={this.updateState}/>
                   </InputGroup>
-                  <InputGroup className="mb-3">
+                  <InputGroup className="mb-3 input-register">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="icon-lock"></i>
@@ -101,7 +101,7 @@ class Register extends Component {
                         value={this.state.pass}
                         onChange={this.updateState}/>
                   </InputGroup>
-                  <InputGroup className="mb-4">
+                  <InputGroup className="mb-4 input-register">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="icon-lock"></i>
@@ -114,7 +114,7 @@ class Register extends Component {
                         onChange={this.updateState}/>
                   </InputGroup>
                   <Button color="success"
-                    className="px-4"
+                    className="px-4 btn-register"
                     onClick={(event) => this.register(event)}>
                       Register
                   </Button>

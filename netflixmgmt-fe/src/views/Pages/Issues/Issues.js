@@ -69,7 +69,6 @@ class Issues extends Component {
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Report date</th>
                         <th scope="col">Status</th>
@@ -80,7 +79,6 @@ class Issues extends Component {
                     {this.state.availabilityIssues.map((issue) =>
                         <tr key={issue.id}>
 
-                            <th scope="row">{issue.id}</th>
                             <td>{issue.name}</td>
                             <td>{issue.date}</td>
                             <td>{issue.issueStatus.name}</td>

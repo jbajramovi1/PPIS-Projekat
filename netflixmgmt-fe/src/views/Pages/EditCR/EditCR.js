@@ -109,7 +109,7 @@ class EditCR extends Component{
 		);
 
 		return(
-		  <div className="app flex-row align-items-center">
+		  <div className="app flex-row ">
 			<Container>
 			  <Row className="justify-content-center" >
 				<Col md="8">
@@ -145,6 +145,15 @@ class EditCR extends Component{
 						</Col>
 					  </FormGroup>
 
+						<FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Description: </Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <FormText color="muted">{this.state.change_request.description}</FormText>
+						</Col>
+					  </FormGroup>
+
 					  <FormGroup row>
 						<Col md="3">
 						  <Label>Change Request Type: </Label>
@@ -167,27 +176,20 @@ class EditCR extends Component{
 						</Col>
 					  </FormGroup>
 
-					  <FormGroup row>
-						<Col md="3">
-						  <Label>Change Request Description: </Label>
-						</Col>
-						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.description}</FormText>
-						</Col>
-					  </FormGroup>
+
 
 					  <FormGroup row>
 						<Col md="3">
 						  <Label>Change Request Revision Comment:</Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <Input type="textarea" name="description" value={this.state.description} onChange={this.onChange} id="textarea-input" rows="9" placeholder="Change Request Revision Comment..." />
+						  <Input type="textarea" name="description" value={this.state.description} onChange={this.onChange} id="textarea-input" rows="4" placeholder="Change Request Revision Comment..." />
 						</Col>
 					  </FormGroup>
 
 				  </CardBody>
 				  <CardFooter>
-					<button type = "button" onClick={event => this.updateCR(event)} class="btn btn-outline-primary btn-lg btn-block">Save</button>
+					<button type = "button" onClick={event => this.updateCR(event)} class="btn btn-md btn-block">Save</button>
 				  </CardFooter>
 				</Card>
 				</Col>

@@ -98,10 +98,10 @@ class RegisterCR extends Component{
                 <option value={type.id}>{type.name}</option>
             );
     return(
-      <div className="app flex-row align-items-center">
+      <div className="app flex-row ">
         <Container>
           <Row className="justify-content-center" >
-            <Col md="8">
+            <Col md="11">
             <Form  action="" encType="multipart/form-data" className="form-horizontal">
 
             <Card>
@@ -146,10 +146,10 @@ class RegisterCR extends Component{
 
               </CardBody>
               <CardFooter>
-                <Button size="sm" onClick={event => this.registerCR(event)} color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
-                <Button type="reset" color="danger"  size="sm"><i className="fa fa-ban"></i> Reset</Button>
+                <Button size="md" onClick={event => this.registerCR(event)} color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                <Button type="reset" color="danger"  size="md"><i className="fa fa-ban"></i> Reset</Button>
                 <Row className="float-right">
-                  <Button type="reset" color="secondary"  size="sm">Cancel</Button>
+                  <Button type="reset" color="secondary"  size="md">Cancel</Button>
                 </Row>
               </CardFooter>
             </Card>
