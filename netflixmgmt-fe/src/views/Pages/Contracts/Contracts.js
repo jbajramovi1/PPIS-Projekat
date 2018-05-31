@@ -51,7 +51,7 @@ class Contracts extends Component {
                     <tbody>
                     {this.state.contracts.map((contract) =>
                         <tr key={contract.id}>
-							<Link to={`/viewcontract/${contract.id}`}><td>{contract.name}</td></Link>                            
+							<td><Link to={`/view-contract/${contract.id}`}>{contract.name}</Link></td>                            
                             <td>{contract.client}</td>
                       </tr>)
                     }

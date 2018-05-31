@@ -83,7 +83,7 @@ class ViewCR extends Component{
 						  <Label>Change Request ID:</Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">#{this.state.change_request.id}</FormText>
+						  <FormText className="form-text" color="muted">#{this.state.change_request.id}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -92,7 +92,7 @@ class ViewCR extends Component{
 						  <Label>Change Request Name:</Label>
 						</Col>
 						<Col xs="12" md="9">
-						<FormText color="muted">{this.state.change_request.name}</FormText>
+						<FormText className="form-text" color="muted">{this.state.change_request.name}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -101,7 +101,7 @@ class ViewCR extends Component{
 						  <Label>Change Request Submitted By:</Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.account.username}</FormText>
+						  <FormText className="form-text" color="muted">{this.state.change_request.account.username}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -110,7 +110,7 @@ class ViewCR extends Component{
 						  <Label>Change Request Type: </Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.changeRequestType.name}</FormText>
+						  <FormText className="form-text" color="muted">{this.state.change_request.changeRequestType.name}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -119,7 +119,7 @@ class ViewCR extends Component{
 						  <Label>Change Request Status: </Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.changeRequestStatus.name}</FormText>
+						  <FormText className="form-text" color="muted">{this.state.change_request.changeRequestStatus.name}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -128,7 +128,7 @@ class ViewCR extends Component{
 						  <Label>Change Request Description: </Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.description}</FormText>
+						  <FormText className="form-text" color="muted">{this.state.change_request.description}</FormText>
 						</Col>
 					  </FormGroup>
 
@@ -137,13 +137,13 @@ class ViewCR extends Component{
 						  <Label>Change Request Revision Comment:</Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText color="muted">{this.state.change_request.revisionComment}</FormText>
+						  <FormText className="form-text" color="muted">{this.state.change_request.revisionComment}</FormText>
 						</Col>
 					  </FormGroup>
 
 				  </CardBody>
 				  <CardFooter>
-					<Link to={`/changerequests/`}><button type = "button" class="btn btn-cr btn-md btn-block">Back</button></Link>					
+					<Link to={`/changerequests/`}><button type = "button" class="btn btn-cr btn-md btn-block">Back</button></Link>
 				  </CardFooter>
 				</Card>
 				</Col>

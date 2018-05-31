@@ -16,7 +16,7 @@ class ViewContract extends Component {
         }
         ;
     }
-    
+
 
     componentDidMount() {
         axios.get(API_ROUTE + this.props.match.params.id)
@@ -28,10 +28,10 @@ class ViewContract extends Component {
     render() {
         return (
 
-        <div className="app flex-row align-items-center">
+        <div className="app flex-row ">
             <Container>
                 <Row className="justify-content-center" >
-                    <Col md="8">
+                    <Col md="11">
                         <Card>
                             <CardHeader>
                                 <strong>View Contract</strong>
@@ -42,7 +42,7 @@ class ViewContract extends Component {
                                         <Label>Contract ID:</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <FormText color="muted">{this.state.contract.id}</FormText>
+                                        <FormText className="form-text" color="muted">{this.state.contract.id}</FormText>
                                     </Col>
                                 </FormGroup>
 
@@ -51,7 +51,7 @@ class ViewContract extends Component {
                                         <Label>Contract Name:</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <FormText color="muted">{this.state.contract.name}</FormText>
+                                        <FormText className="form-text" color="muted">{this.state.contract.name}</FormText>
                                     </Col>
                                 </FormGroup>
 
@@ -60,7 +60,7 @@ class ViewContract extends Component {
                                         <Label>Client:</Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <FormText color="muted">{this.state.contract.client}</FormText>
+                                        <FormText className="form-text" color="muted">{this.state.contract.client}</FormText>
                                     </Col>
                                 </FormGroup>
 
@@ -69,7 +69,7 @@ class ViewContract extends Component {
                                         <Label>Description: </Label>
                                     </Col>
                                     <Col xs="12" md="9">
-                                        <FormText color="muted">{this.state.contract.description}</FormText>
+                                        <FormText className="form-text" color="muted">{this.state.contract.description}</FormText>
                                     </Col>
                                 </FormGroup>
                             </CardBody>

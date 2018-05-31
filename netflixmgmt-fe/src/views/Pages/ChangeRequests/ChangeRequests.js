@@ -69,8 +69,8 @@ class ChangeRequests extends Component {
                     </thead>
                     <tbody>
                     {this.state.changeRequests.map((request) =>
-                        <tr key={request.id}>												
-                            <Link to={`/viewcr/${request.id}`}><td>{request.name}</td></Link>
+                        <tr key={request.id}>
+                            <td><Link to={`/viewcr/${request.id}`}>{request.name}</Link></td>
                             <td>{request.changeRequestStatus.name}</td>
                             <td>{request.changeRequestType.name}</td>
                         </tr>

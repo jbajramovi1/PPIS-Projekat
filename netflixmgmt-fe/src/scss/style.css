@@ -118,6 +118,9 @@ abbr[data-original-title] {
   text-align: center;
 }
 
+.form-text{
+  font-size: 1.1em!important;
+}
 
 address {
   margin-bottom: 1rem;
