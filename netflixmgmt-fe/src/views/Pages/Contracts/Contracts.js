@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardColumns, CardHeader, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -27,8 +27,6 @@ class Contracts extends Component {
         ;
     }
 
-
-
     componentDidMount() {
         axios.get(API_ROUTE,{})
             .then( response => {
@@ -53,8 +51,7 @@ class Contracts extends Component {
                     <tbody>
                     {this.state.contracts.map((contract) =>
                         <tr key={contract.id}>
-
-                            <td>{contract.name}</td>
+							<Link to={`/viewcontract/${contract.id}`}><td>{contract.name}</td></Link>                            
                             <td>{contract.client}</td>
                       </tr>)
                     }

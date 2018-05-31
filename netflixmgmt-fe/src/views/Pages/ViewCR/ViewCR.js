@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import {
 Container,
@@ -142,7 +143,7 @@ class ViewCR extends Component{
 
 				  </CardBody>
 				  <CardFooter>
-					<button type = "button" class="btn btn-cr btn-md btn-block">Back</button>
+					<Link to={`/changerequests/`}><button type = "button" class="btn btn-cr btn-md btn-block">Back</button></Link>					
 				  </CardFooter>
 				</Card>
 				</Col>

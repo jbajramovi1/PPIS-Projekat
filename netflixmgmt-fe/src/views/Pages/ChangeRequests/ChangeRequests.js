@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardColumns, CardHeader, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -69,13 +69,12 @@ class ChangeRequests extends Component {
                     </thead>
                     <tbody>
                     {this.state.changeRequests.map((request) =>
-                        <tr key={request.id}>
-
-                            <td>{request.name}</td>
+                        <tr key={request.id}>												
+                            <Link to={`/viewcr/${request.id}`}><td>{request.name}</td></Link>
                             <td>{request.changeRequestStatus.name}</td>
                             <td>{request.changeRequestType.name}</td>
-                        </tr>)
-                    }
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             //</div>
