@@ -18,6 +18,7 @@ import { DefaultLayout } from './containers';
 
 import { Login, Page404, Page500, Register} from './views/Pages';
 import axios from "axios";
+import AuthInfo from "./AuthInfo";
 
 
 
@@ -25,12 +26,12 @@ import axios from "axios";
 
 class App extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     let token = localStorage.getItem("token");
     if (token) {
       axios.defaults.headers['Authorization'] = token;
     }
-    console.log('axios defaults', axios.defaults)
+    console.log(AuthInfo.getRole())
   }
 
 

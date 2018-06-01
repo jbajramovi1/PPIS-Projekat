@@ -35,6 +35,7 @@ class Login extends Component {
     axios.post(API_ROUTE, data)
       .then(response => {
         localStorage.setItem('token', response.headers['authorization']);
+        localStorage.setItem('role', response.headers['role']);
         axios.defaults.headers['Authorization'] = response.headers['authorization'];
         this.setState({authenticated: true})
       })
