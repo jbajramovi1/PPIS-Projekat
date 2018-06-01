@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, CardColumns, CardHeader, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import AuthInfo from '../../../AuthInfo'
 
 const API_ROUTE = 'http://localhost:8080/changeRequest/all';
 
@@ -44,6 +44,12 @@ class ChangeRequests extends Component {
         ;
     }
 
+    isReviewer(){
+        if(AuthInfo.getRole() == 'ROLE_REVIEWER')
+            return true;
+        else
+        return false
+    }
 
 
     componentDidMount() {
@@ -70,7 +76,7 @@ class ChangeRequests extends Component {
                     <tbody>
                     {this.state.changeRequests.map((request) =>
                         <tr key={request.id}>
-                            <td><Link to={`/viewcr/${request.id}`}>{request.name}</Link></td>
+                            <td><Link to={this.isReviewer() ? `editcr/${request.id}`:`/viewcr/${request.id}`}>{request.name}</Link></td>
                             <td>{request.changeRequestStatus.name}</td>
                             <td>{request.changeRequestType.name}</td>
                         </tr>
