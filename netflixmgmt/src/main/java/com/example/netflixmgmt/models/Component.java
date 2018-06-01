@@ -21,8 +21,6 @@ public class Component {
     @ManyToOne(targetEntity = AvailabilityType.class, fetch = FetchType.LAZY)
     private AvailabilityType availabilityType;
 
-    @ManyToOne(targetEntity = Contract.class, fetch = FetchType.LAZY)
-    private Contract contract;
 
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "component", targetEntity = Issue.class, cascade = CascadeType.ALL)
 //    private List<Issue> issueValues = new ArrayList<>();
@@ -34,7 +32,7 @@ public class Component {
         this.name = name;
         this.description = description;
         this.availabilityType = availabilityType;
-        this.contract = contract;
+
     }
 
     public Long getId() {
@@ -69,13 +67,6 @@ public class Component {
         this.availabilityType = availabilityType;
     }
 
-    public Contract getContract() {
-        return contract;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
-    }
 
 //    public List<Issue> getIssueValues() {
 //        return issueValues;

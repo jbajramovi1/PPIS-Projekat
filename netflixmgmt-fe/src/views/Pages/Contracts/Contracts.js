@@ -19,7 +19,8 @@ class Contracts extends Component {
                 "id": "",
                 "name" : "",
                 "client":"",
-                "description": "",
+                "component": { "id":"","name":""},
+                "description": ""
 
             }
         ]
@@ -45,14 +46,15 @@ class Contracts extends Component {
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Client</th>
-
+                        <th scope="col">Component</th>
                     </tr>
                     </thead>
                     <tbody>
                     {this.state.contracts.map((contract) =>
                         <tr key={contract.id}>
-							<td><Link to={`/view-contract/${contract.id}`}>{contract.name}</Link></td>                            
+							<td><Link to={`/view-contract/${contract.id}`}>{contract.name}</Link></td>
                             <td>{contract.client}</td>
+                            <td>{contract.component.name}</td>
                       </tr>)
                     }
                     </tbody>

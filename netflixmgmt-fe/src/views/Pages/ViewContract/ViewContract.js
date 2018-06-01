@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormGroup, FormText, Label, CardFooter, ColButton, Card, CardBody, CardColumns, CardHeader, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -12,7 +13,14 @@ class ViewContract extends Component {
     constructor(props){
         super(props);
         this.state = {
-            contract:{}
+            contract:{
+                "id": "",
+                "name" : "",
+                "client":"",
+                "component": { "id":"","name":""},
+                "description": ""
+
+            }
         }
         ;
     }
@@ -63,6 +71,14 @@ class ViewContract extends Component {
                                         <FormText className="form-text" color="muted">{this.state.contract.client}</FormText>
                                     </Col>
                                 </FormGroup>
+                                <FormGroup row>
+                                    <Col md="3">
+                                        <Label>Component: </Label>
+                                    </Col>
+                                    <Col xs="12" md="9">
+                                        <FormText className="form-text" color="muted">{this.state.contract.component.name}</FormText>
+                                    </Col>
+                                </FormGroup>
 
                                 <FormGroup row>
                                     <Col md="3">
@@ -73,6 +89,9 @@ class ViewContract extends Component {
                                     </Col>
                                 </FormGroup>
                             </CardBody>
+                            <CardFooter>
+                              <Link to={`/contracts/`}><button type = "button" class="btn btn-cr btn-md btn-block">Back</button></Link>
+                            </CardFooter>
                         </Card>
                     </Col>
                 </Row>

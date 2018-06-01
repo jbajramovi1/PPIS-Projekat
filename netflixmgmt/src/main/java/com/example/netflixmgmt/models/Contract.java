@@ -21,6 +21,8 @@ public class Contract {
 
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contract", targetEntity = Component.class, cascade = CascadeType.ALL)
 //    private List<Component> componentValues = new ArrayList<>();
+    @ManyToOne(targetEntity = Component.class, fetch = FetchType.EAGER)
+    private Component component;
 
     public Contract() {
     }
@@ -63,7 +65,15 @@ public class Contract {
         this.client = client;
     }
 
-//    public List<Component> getComponentValues() {
+    public Component getComponent() {
+        return component;
+    }
+
+    public void setComponent(Component component) {
+        this.component = component;
+    }
+
+    //    public List<Component> getComponentValues() {
 //        return componentValues;
 //    }
 //

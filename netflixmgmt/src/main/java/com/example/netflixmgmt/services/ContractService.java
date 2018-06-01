@@ -18,6 +18,7 @@ public class ContractService {
     public Contract createContract(Contract data){
         Contract contract=new Contract();
         contract.setName(data.getName());
+        contract.setComponent(data.getComponent());
         contract.setDescription(data.getDescription());
         contract.setClient(data.getClient());
         return contractRepository.save(contract);
@@ -38,6 +39,7 @@ public class ContractService {
     public Contract updateContract(Contract data,Long id){
         Contract contract=contractRepository.findContractById(Long.valueOf(id));
         if (data.getName()!=null) contract.setName(data.getName());
+        if (data.getComponent()!=null) contract.setComponent(data.getComponent());
         if (data.getDescription()!=null) contract.setDescription(data.getDescription());
         if (data.getClient()!=null) contract.setClient(data.getClient());
         return contractRepository.save(contract);

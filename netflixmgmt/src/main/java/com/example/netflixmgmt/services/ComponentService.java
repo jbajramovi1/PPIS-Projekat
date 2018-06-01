@@ -19,7 +19,6 @@ public class ComponentService {
         Component component=new Component();
         component.setName(data.getName());
         component.setDescription(data.getDescription());
-        component.setContract(data.getContract());
         component.setAvailabilityType(data.getAvailabilityType());
         return componentRepository.save(component);
     }
@@ -40,7 +39,6 @@ public class ComponentService {
         Component component=componentRepository.findComponentById(Long.valueOf(id));
         if (data.getName()!=null) component.setName(data.getName());
         if (data.getDescription()!=null) component.setDescription(data.getDescription());
-        if (data.getContract()!=null) component.setContract(data.getContract());
         if (data.getAvailabilityType()!=null) component.setAvailabilityType(data.getAvailabilityType());
         return componentRepository.save(component);
     }
