@@ -26,15 +26,7 @@ export default {
         text: '',
       },
     },
-    {
-      name: 'Report an issue',
-      url: '/registerai',
-      icon: 'icon-calculator',
-      badge: {
-        variant: 'info',
-        text: '',
-      },
-    },
+
     {
         name: 'View all requests',
         url: '/changerequests',
@@ -53,7 +45,44 @@ export default {
             variant: 'info',
             text: '',
           }
+        },
+        {
+          name: 'Report an issue',
+          url: '/registerai',
+          icon: 'icon-calculator',
+          badge: {
+            variant: 'info',
+            text: '',
+          },
+        },
+        {
+          name: 'View all issues',
+          url: '/issues',
+          icon: 'icon-calculator',
+          badge: {
+            variant: 'info',
+            text: '',
+          }
+        },
+        {
+          name: 'Issue statistics',
+          url: '/issuestatistics',
+          icon: 'icon-calculator',
+          badge: {
+            variant: 'info',
+            text: '',
+          }
+        },
+        {
+          name: 'View all contracts',
+          url: '/contracts',
+          icon: 'icon-calculator',
+          badge: {
+            variant: 'info',
+            text: '',
+          }
         }
-      
+
+
       ]
 };

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.example.netflixmgmt.models.ChangeRequest;
 import com.example.netflixmgmt.models.ChangeRequestStatus;
 import com.example.netflixmgmt.models.ChangeRequestType;
+import com.example.netflixmgmt.repositories.IChangeRequestRepository;
 import com.example.netflixmgmt.services.ChangeRequestService;
 import com.example.netflixmgmt.services.ChangeRequestStatusService;
 import com.example.netflixmgmt.services.ChangeRequestTypeService;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/changeRequest")
@@ -82,8 +84,8 @@ public class ChangeRequestController {
 			return ResponseEntity.ok(changeService.createChangeRequest(request));
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteRequest(@RequestParam("id") Long id) {
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteRequest(@PathVariable Long id) {
 		try {
 			changeService.deleteById(id);
 			return ResponseEntity.ok("");
@@ -92,41 +94,13 @@ public class ChangeRequestController {
 		}
 	}
 	
-	@RequestMapping(value = "/save/status", method = RequestMethod.POST)
-	public ResponseEntity<?> saveChangeRequestStatus(@RequestBody ChangeRequestStatus status) {
-		if (status == null)
+    @RequestMapping( value="/update/{id}", method=RequestMethod.POST)
+    public ResponseEntity<?> updateChangeRequest(@PathVariable Long id, @RequestBody ChangeRequest changeRequest) {
+    	if (changeRequest == null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
-		else
-			return ResponseEntity.ok(statusService.createChangeRequestStatus(status));
-	}
-	
-	@RequestMapping(value = "/delete/status", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteChangeRequestStatus(@RequestParam("id") Long id) {
-		try {
-			statusService.deleteById(id);
-			return ResponseEntity.ok("");
-		} catch (ServiceException e){
-	    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
-		}
-	}
-	
-	@RequestMapping(value = "/save/type", method = RequestMethod.POST)
-	public ResponseEntity<?> saveChangeRequestType(@RequestBody ChangeRequestType type) {
-		if (type == null)
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
-		else
-			return ResponseEntity.ok(typeService.createChangeRequestType(type));
-	}
-	
-	@RequestMapping(value = "/delete/type", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteChangeRequestType(@RequestParam("id") Long id) {
-		try {
-			typeService.deleteById(id);
-			return ResponseEntity.ok("");
-		} catch (ServiceException e){
-	    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
-		}
-	}
+    	else
+    		return ResponseEntity.ok(changeService.updateChangeRequest(changeRequest, id));
+    }
 
 	@RequestMapping(value = "/get-stats", method = RequestMethod.GET)
 	public ResponseEntity<?> getStatistics() {
@@ -137,5 +111,4 @@ public class ChangeRequestController {
 		else
 			return ResponseEntity.ok(request);
 	}
-
 }

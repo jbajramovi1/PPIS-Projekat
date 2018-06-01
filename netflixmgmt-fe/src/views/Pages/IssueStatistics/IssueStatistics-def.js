@@ -4,7 +4,7 @@ import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
 
 
-const API_ROUTE = 'http://localhost:8080/changeRequest/get-stats';
+const API_ROUTE = 'http://localhost:8080/issue/get-stats';
 
 
 const pie = {
@@ -29,7 +29,7 @@ const pie = {
       }],
   };
 
-class ChangeStatistics extends Component {
+class IssueStatistics extends Component {
 
   constructor(props){
     super(props);
@@ -95,7 +95,7 @@ class ChangeStatistics extends Component {
         <div className="app flex-row ">
         <Container>
         <Row>
-        <h1 className="title-statistics">Change Statistics</h1>
+        <h1 className="title-statistics">Availibility issues Statistics</h1>
         </Row>
         <div className="animated fadeIn">
         <CardColumns className="cols-2">
@@ -114,8 +114,6 @@ class ChangeStatistics extends Component {
           </Card>
 
         </CardColumns>
-
-
       </div>
       </Container>
       </div>
@@ -123,4 +121,4 @@ class ChangeStatistics extends Component {
   }
 }
 
-export default ChangeStatistics;
+export default IssueStatistics;

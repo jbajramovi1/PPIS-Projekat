@@ -60,10 +60,10 @@ class Login extends Component {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="8">
-              <CardGroup>
+            <Col md="11">
+              <CardGroup className="login-card">
                 <Card className="p-4">
-                  <CardBody>
+                  <CardBody className="login-cardbody">
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
                     <InputGroup className="mb-3">
@@ -93,7 +93,7 @@ class Login extends Component {
                     <Row>
                       <Col xs="6">
                         <Button color="primary"
-                          className="px-4"
+                          className="px-4 login-btn"
                           onClick={(event) => this.login(event)}>
                             Login
                         </Button>
@@ -104,12 +104,12 @@ class Login extends Component {
                     </Row>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: 44 + '%' }}>
-                  <CardBody className="text-center">
+                <Card className="text-white bg-primary card-register py-5 d-md-down-none" style={{ width: 44 + '%' }}>
+                  <CardBody className="text-center" className="login-cardbody-register">
                     <div>
-                      <h2>Sign up</h2>
+                      <h1 className="signup">Sign up</h1>
                       <Button color="primary"
-                      className="mt-3"
+                      className="mt-5 login-btn" size="lg"
                       onClick={event => this.register(event)}
                       active>
                         Register Now!

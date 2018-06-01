@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardColumns, CardHeader, CardGroup, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 
 
-const API_ROUTE = 'http://localhost:8080/changeRequest/all';
+const API_ROUTE = 'http://localhost:8080/issue/all';
 
 
 
-class ChangeRequests extends Component {
+class Issues extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-        requests:[],
-        changeRequests:[
+        issues:[],
+        availabilityIssues:[
             {
                 "id": "",
                 "name" : "",
                 "description": "",
-                "revisionComment": "",
+                "date":"",
+
                 "account": {
                     "id": "",
                         "username": "",
@@ -29,11 +30,17 @@ class ChangeRequests extends Component {
                             "title": ""
                               }
                         },
-                "changeRequestStatus": {
+                "component":{
+                  "id":"",
+                  "name":"",
+                  "description":"",
+                  "client":""
+                },
+                "issueStatus": {
                         "id": "",
                         "name": ""
                          },
-                "changeRequestType": {
+                "issueType": {
                         "id": "",
                         "name": "",
                         "description": ""
@@ -47,9 +54,9 @@ class ChangeRequests extends Component {
 
 
     componentDidMount() {
-        axios.get('http://localhost:8080/changeRequest/all',{})
+        axios.get('http://localhost:8080/issue/all',{})
             .then( response => {
-                this.setState({changeRequests: response.data});
+                this.setState({availabilityIssues: response.data});
 
 
             })
@@ -58,23 +65,26 @@ class ChangeRequests extends Component {
     render() {
         return (
            // <div className="app flex-row align-items-center">
-
+           //<h2>Availability Issues</h2>
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
+                        <th scope="col">Report date</th>
                         <th scope="col">Status</th>
                         <th scope="col">Type</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.changeRequests.map((request) =>
-                        <tr key={request.id}>
-                            <td><Link to={`/viewcr/${request.id}`}>{request.name}</Link></td>
-                            <td>{request.changeRequestStatus.name}</td>
-                            <td>{request.changeRequestType.name}</td>
-                        </tr>
-                    )}
+                    {this.state.availabilityIssues.map((issue) =>
+                        <tr key={issue.id}>
+
+                            <td>{issue.name}</td>
+                            <td>{issue.date}</td>
+                            <td>{issue.issueStatus.name}</td>
+                            <td>{issue.issueType.name}</td>
+                        </tr>)
+                    }
                     </tbody>
                 </table>
             //</div>
@@ -82,4 +92,4 @@ class ChangeRequests extends Component {
     }
 }
 
-export default ChangeRequests;
+export default Issues;

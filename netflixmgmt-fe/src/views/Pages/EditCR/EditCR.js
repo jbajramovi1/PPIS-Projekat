@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 import {
 Container,
@@ -27,14 +26,12 @@ InputGroupText,
 Label,
 Row, } from 'reactstrap';
 
-const API_ROUTE = 'http://localhost:8080/changeRequest/show/';
-
-class ViewCR extends Component{
+class EditCR extends Component{
 	constructor(props) {
 		super(props);
 
 		this.state = {
-		  change_request:
+			change_request:
 			{
 			"id": "",
 			"name" : "",
@@ -58,21 +55,64 @@ class ViewCR extends Component{
 							"name": "",
 							"description": ""
 								}
-	}
+	},
+			types: [],
+			statuses: [],
+			description:''
 		};
+
+		this.updateCR = this.updateCR.bind(this);
+		this.onChange=this.onChange.bind(this);
 	}
 
 	componentDidMount(){
-		axios.get(API_ROUTE + this.props.match.params.id)
-		.then(res => {this.setState({ change_request: res.data });console.log(res.data);});
+		axios.get('http://localhost:8080/changeRequest/show/' + this.props.match.params.id)
+			.then(res => {this.setState({ change_request: res.data })});
+
+		axios.get('http://localhost:8080/changeRequestType/all',{})
+			.then( response => {this.setState({types: response.data});})
+
+		axios.get('http://localhost:8080/changeRequestStatus/all',{})
+			.then( response => {this.setState({statuses: response.data});})
+	}
+
+	updateCR(event){
+		axios.post('http://localhost:8080/changeRequest/update/'+ this.props.match.params.id, {
+			name: this.state.change_request.name,
+			description: this.state.change_request.description,
+			changeRequestType: {id:this.state.change_request.changeRequestType.id},
+			changeRequestStatus: {id:this.state.change_request.changeRequestStatus.id},
+			revisionComment: this.state.description
+		})
+		.then(this.handleSuccess.bind(this))
+		.catch(console.log(this));
+	}
+
+	handleSuccess(response) {
+		if(response.data){
+			alert('Successfully updated change request!');
+			window.location='/dashboard';
+		}
+	}
+
+	onChange(e) {
+		this.setState({[e.target.name]:e.target.value});
 	}
 
 	render(){
+		let types = Array.from(this.state.types).map((type) =>
+			<option value={type.id}>{type.name}</option>
+		);
+
+		let status = Array.from(this.state.statuses).map((status) =>
+			<option value={status.id}>{status.name}</option>
+		);
+
 		return(
 		  <div className="app flex-row ">
 			<Container>
 			  <Row className="justify-content-center" >
-				<Col md="8">
+				<Col md="11">
 				<Card>
 				  <CardHeader>
 					<strong>View Change Request</strong>
@@ -105,25 +145,7 @@ class ViewCR extends Component{
 						</Col>
 					  </FormGroup>
 
-					  <FormGroup row>
-						<Col md="3">
-						  <Label>Change Request Type: </Label>
-						</Col>
-						<Col xs="12" md="9">
-						  <FormText className="form-text" color="muted">{this.state.change_request.changeRequestType.name}</FormText>
-						</Col>
-					  </FormGroup>
-
-					  <FormGroup row>
-						<Col md="3">
-						  <Label>Change Request Status: </Label>
-						</Col>
-						<Col xs="12" md="9">
-						  <FormText className="form-text" color="muted">{this.state.change_request.changeRequestStatus.name}</FormText>
-						</Col>
-					  </FormGroup>
-
-					  <FormGroup row>
+						<FormGroup row>
 						<Col md="3">
 						  <Label>Change Request Description: </Label>
 						</Col>
@@ -134,16 +156,40 @@ class ViewCR extends Component{
 
 					  <FormGroup row>
 						<Col md="3">
+						  <Label>Change Request Type: </Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <Input type="select" name="type" id="select" value={this.state.change_request.changeRequestType.id} onChange={this.onChange}>
+							{types}
+						  </Input>
+						</Col>
+					  </FormGroup>
+
+					  <FormGroup row>
+						<Col md="3">
+						  <Label>Change Request Status: </Label>
+						</Col>
+						<Col xs="12" md="9">
+						  <Input type="select" name="type" id="select" value={this.state.change_request.changeRequestStatus.id} onChange={this.onChange}>
+							{status}
+						  </Input>
+						</Col>
+					  </FormGroup>
+
+
+
+					  <FormGroup row>
+						<Col md="3">
 						  <Label>Change Request Revision Comment:</Label>
 						</Col>
 						<Col xs="12" md="9">
-						  <FormText className="form-text" color="muted">{this.state.change_request.revisionComment}</FormText>
+						  <Input type="textarea" name="description" value={this.state.description} onChange={this.onChange} id="textarea-input" rows="4" placeholder="Change Request Revision Comment..." />
 						</Col>
 					  </FormGroup>
 
 				  </CardBody>
 				  <CardFooter>
-					<Link to={`/changerequests/`}><button type = "button" class="btn btn-cr btn-md btn-block">Back</button></Link>
+					<button type = "button" onClick={event => this.updateCR(event)} class="btn btn-md btn-block">Save</button>
 				  </CardFooter>
 				</Card>
 				</Col>
@@ -154,4 +200,4 @@ class ViewCR extends Component{
 	}
 }
 
-export default ViewCR;
+export default EditCR;

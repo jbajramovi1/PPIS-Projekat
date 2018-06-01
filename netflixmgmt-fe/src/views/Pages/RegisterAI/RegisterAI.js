@@ -101,14 +101,14 @@ class RegisterAI extends Component{
                 <option value={type.id}>{type.name}</option>
             );
 
-    let components = Array.from(this.state.components).map((type) =>
-                <option value={type.id}>{type.name}</option>
+    let components = Array.from(this.state.components).map((component) =>
+                <option value={component.id}>{component.name}</option>
                     );
     return(
-      <div className="app flex-row align-items-center">
+      <div className="app flex-row ">
         <Container>
           <Row className="justify-content-center" >
-            <Col md="8">
+            <Col md="11">
             <Form  encType="multipart/form-data" className="form-horizontal">
 
             <Card>
@@ -132,7 +132,7 @@ class RegisterAI extends Component{
                       <Label htmlFor="select">Component</Label>
                     </Col>
                     <Col xs="12" md="9">
-                    <Input type="select" name="type" id="select" value={this.state.component} onChange={this.onChange}>
+                    <Input type="select" name="component" id="select" value={this.state.component} onChange={this.onChange}>
 
                       {components}
 
@@ -166,10 +166,10 @@ class RegisterAI extends Component{
 
               </CardBody>
               <CardFooter>
-                <Button onClick={event => this.registerAI(event)} size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
-                <Button type="reset" color="danger"  size="sm"><i className="fa fa-ban"></i> Reset</Button>
+                <Button onClick={event => this.registerAI(event)} size="md" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                <Button type="reset" color="danger"  size="md"><i className="fa fa-ban"></i> Reset</Button>
                 <Row className="float-right">
-                  <Button type="reset" color="secondary"  size="sm">Cancel</Button>
+                  <Button type="reset" color="secondary"  size="md">Cancel</Button>
                 </Row>
               </CardFooter>
             </Card>

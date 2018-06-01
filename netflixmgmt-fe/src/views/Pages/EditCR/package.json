@@ -1,0 +1,6 @@
+{
+  "name":"EditCR",
+  "version":"0.0.0",
+  "private":true,
+  "main":"./EditCR.js"
+}
