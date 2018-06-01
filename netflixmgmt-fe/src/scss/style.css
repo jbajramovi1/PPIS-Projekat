@@ -1080,6 +1080,11 @@ pre {
   .offset-xl-11 {
     margin-left: 91.66667%; } }
 
+.bar-cardbody{
+    padding: 40px!important;
+    text-align: center;
+}
+
 .table {
   width: 100%;
   max-width: 100%;

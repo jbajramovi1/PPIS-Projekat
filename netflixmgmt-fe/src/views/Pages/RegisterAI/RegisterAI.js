@@ -101,8 +101,8 @@ class RegisterAI extends Component{
                 <option value={type.id}>{type.name}</option>
             );
 
-    let components = Array.from(this.state.components).map((type) =>
-                <option value={type.id}>{type.name}</option>
+    let components = Array.from(this.state.components).map((component) =>
+                <option value={component.id}>{component.name}</option>
                     );
     return(
       <div className="app flex-row ">
@@ -132,7 +132,7 @@ class RegisterAI extends Component{
                       <Label htmlFor="select">Component</Label>
                     </Col>
                     <Col xs="12" md="9">
-                    <Input type="select" name="type" id="select" value={this.state.component} onChange={this.onChange}>
+                    <Input type="select" name="component" id="select" value={this.state.component} onChange={this.onChange}>
 
                       {components}
 
